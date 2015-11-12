@@ -45,7 +45,7 @@ In a nutshell
 
 Class template `observer_ptr<>` has been proposed for and accepted into C++17 [2][3].
 
-The *observer-ptr* of this project can be used with probably any clang, g++ or MSVC compiler. It has been tested with clang x.x, g++ 5.2 and with VC6 (VS6, no comparison of observers), VC8 (VS2005), VC10 (VS2010), VC12 (VS2012), VC13 (VS2013), VC14 (VS2015).
+The *observer-ptr* of this project can be used with probably any clang, g++ or MSVC compiler. It has been tested with clang 3.4, g++ 5.2 and with VC6 (VS6, no comparison of observers), VC8 (VS2005), VC10 (VS2010), VC12 (VS2012), VC13 (VS2013), VC14 (VS2015).
 
 License
 -------
