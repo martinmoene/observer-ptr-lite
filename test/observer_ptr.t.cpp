@@ -216,10 +216,14 @@ CASE( "Specialized: Allows to compare if an observer is not equal to another obs
 CASE( "Specialized: Allows to compare if an observer is equal to nullptr" )
 {
 #if nop_HAVE_NULLPTR
+    int a = 7;
     observer_ptr<int> p;
+    observer_ptr<int> q( &a );
 
-    EXPECT(       p == nullptr );
-    EXPECT( nullptr == p       );
+    EXPECT(           p == nullptr );
+    EXPECT_NOT(       q == nullptr );
+    EXPECT(     nullptr == p       );
+    EXPECT_NOT( nullptr == q       );
 #else
     EXPECT( !!"nullptr is not available (no C++11)" );
 #endif
@@ -230,9 +234,12 @@ CASE( "Specialized: Allows to compare if an observer is not equal to nullptr" )
 #if nop_HAVE_NULLPTR
     int a = 7;
     observer_ptr<int> p( &a );
+    observer_ptr<int> q;
 
-    EXPECT(       p != nullptr );
-    EXPECT( nullptr != p       );
+    EXPECT(           p != nullptr );
+    EXPECT_NOT(       q != nullptr );
+    EXPECT(     nullptr != p       );
+    EXPECT_NOT( nullptr != q       );
 #else
     EXPECT( !!"nullptr is not available (no C++11)" );
 #endif
