@@ -112,7 +112,7 @@ public:
     : ptr( nop_NULLPTR ) {}
 
 #if nop_HAVE_NULLPTR
-    nop_constexpr14 observer_ptr( nullptr_t ) nop_noexcept
+    nop_constexpr14 observer_ptr( std::nullptr_t ) nop_noexcept
     : ptr( nullptr ) {}
 #endif
 
@@ -199,25 +199,25 @@ bool operator!=( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 #if nop_HAVE_NULLPTR
 
 template< class W >
-bool operator==( observer_ptr<W> p, nullptr_t ) nop_noexcept
+bool operator==( observer_ptr<W> p, std::nullptr_t ) nop_noexcept
 {
     return !p;
 }
 
 template< class W >
-bool operator==( nullptr_t, observer_ptr<W> p ) nop_noexcept
+bool operator==( std::nullptr_t, observer_ptr<W> p ) nop_noexcept
 {
     return !p;
 }
 
 template< class W >
-bool operator!=( observer_ptr<W> p, nullptr_t ) nop_noexcept
+bool operator!=( observer_ptr<W> p, std::nullptr_t ) nop_noexcept
 {
     return (bool) p;
 }
 
 template< class W >
-bool operator!=( nullptr_t, observer_ptr<W> p ) nop_noexcept
+bool operator!=( std::nullptr_t, observer_ptr<W> p ) nop_noexcept
 {
     return (bool) p;
 }
