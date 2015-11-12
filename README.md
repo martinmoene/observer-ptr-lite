@@ -59,7 +59,7 @@ Dependencies
 
 Installation
 ------------
-*observer-ptr* is a single-file header-only library. Put `observer-ptr.h` in the [include](include) folder directly into the project source tree or somewhere reachable from your project.
+*observer-ptr* is a single-file header-only library. Put [observer_ptr.h](include/nonstd/observer_ptr.h) in the [include](include) folder directly into the project source tree or somewhere reachable from your project.
 
 
 Building the tests
