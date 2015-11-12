@@ -284,7 +284,6 @@ CASE( "Specialized: Allows to compute hash" )
 {
 #if nop_CPP11_OR_GREATER
     int a = 7;
-    auto h = std::hash< observer_ptr<int> >()( make_observer( &a ) );
     EXPECT( std::hash< observer_ptr<int> >()( make_observer( &a ) ) );
 #else
     EXPECT( !!"hash is not available (no C++11)" );
