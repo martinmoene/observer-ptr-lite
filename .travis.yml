@@ -1,0 +1,10 @@
+language:
+  - cpp
+
+compiler:
+  - clang
+  - gcc
+
+script:
+  - cd ~/build/martinmoene/observer-ptr/test
+  - $CXX -std=c++0x -Wall -I../include -o observer_ptr.t observer_ptr.t.cpp && ./observer_ptr.t && ./observer_ptr.t --list-tests
