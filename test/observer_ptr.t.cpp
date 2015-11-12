@@ -319,6 +319,7 @@ g++ -std=c++03 -I../include -o observer_ptr.t.exe observer_ptr.t.cpp && observer
 g++ -std=c++11 -I../include -o observer_ptr.t.exe observer_ptr.t.cpp && observer_ptr.t.exe --pass
 g++ -std=c++14 -I../include -o observer_ptr.t.exe observer_ptr.t.cpp && observer_ptr.t.exe --pass
 cl -EHsc -I../include observer_ptr.t.cpp && observer_ptr.t.exe --pass
+cl -EHsc -I../include -Dnop_FEATURE_ALLOW_IMPLICIT_CONVERSION=1 observer_ptr.t.cpp && observer_ptr.t.exe --pass
 cl -EHsc -I../include -Dnop_CONFIG_CONFIRMS_COMPILATION_ERRORS=1 observer_ptr.t.cpp && observer_ptr.t.exe --pass
 #endif
 
