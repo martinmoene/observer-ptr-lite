@@ -21,7 +21,7 @@ CASE( "__cplusplus" )
     EXPECT( __cplusplus > 0L );
 }
 
-CASE( "Disallows to delete the observer_ptr (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS)" )
+CASE( "Disallows to delete the observer_ptr (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS) [.]" )
 {
 #if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
     int a = 7;
@@ -111,22 +111,30 @@ CASE( "Allows to retrieve the member pointed to" )
     EXPECT( sp->a == s.a );
 }
 
-CASE( "Allows to test for a non-null pointer via conversion to bool (explicitly if available)" )
+CASE( "Allows to test for a non-null pointer via conversion to bool" )
 {
+#if nop_HAVE_EXPLICIT_CONVERSION || nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
     int a = 7;
 
     observer_ptr<int> ap( &a );
 
     EXPECT( !!ap );
+#else
+    EXPECT( !!"no explicit (no C++11) or implicit conversion (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+#endif
 }
 
-CASE( "Allows to convert to the observed pointer (explicitly if available)" )
+CASE( "Allows to convert to the observed pointer" )
 {
+#if nop_HAVE_EXPLICIT_CONVERSION || nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
     int a = 7;
     observer_ptr<int> ap( &a );
     int * q( ap );
 
     EXPECT( q == &a );
+#else
+    EXPECT( !!"no explicit (no C++11) or implicit conversion (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+#endif
 }
 
 CASE( "Allows to reset to stop observing" )

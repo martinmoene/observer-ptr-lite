@@ -41,9 +41,9 @@ prompt>g++ -std=c++03 -Wall -I../include -o 01-basic.exe 01-basic.cpp && 01-basi
 
 In a nutshell
 -------------
-**observer-ptr** is an implementation of the *world’s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading. [1]
+**observer-ptr** is an implementation of the *world’s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading ([Note 1](#note1)).
 
-Class template `observer_ptr<>` has been proposed for and accepted into C++17 [2][3].
+Class template `observer_ptr<>` has been proposed for and accepted into C++17 [1][2].
 
 The *observer-ptr* of this project can be used with probably any clang, g++ or MSVC compiler. It has been tested with clang 3.4, g++ 5.2 and with VC6 (VS6, no comparison of observers), VC8 (VS2005), VC10 (VS2010), VC11 (VS2012), VC12 (VS2013), VC14 (VS2015).
 
@@ -98,10 +98,19 @@ All tests should pass, indicating your platform is supported and you are ready t
 Synopsis
 --------
 
+**Contents**  
+- [Configuration macros](#configuration-macros)
+- [Feature selection macros](#feature-selection-macros)
+
 ### Configuration macros
 
 \-D<b>nop\_CONFIG\_CONFIRMS\_COMPILATION\_ERRORS</b>=0  
 Define this macro to 1 to experience the by-design compile-time errors of the *observer-ptr* components in the test suite. Default is 0.
+
+### Feature selection macros
+
+\-D<b>nop\_FEATURE\_ALLOW\_IMPLICIT\_CONVERSION</b>=0  
+The `observer_ptr` from the C++17 draft provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these conversions at default. If you still want them, define this macro to 1. Default is 0. ([Note 2](#note2))
 
 
 Other open source implementations
@@ -112,11 +121,12 @@ None known.
 Notes and references
 --------------------
 ### Notes
-[1] This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer.*
+<a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer.*  
+<a id="note2"></a>Note 2. As a side effect, `observer_ptr<>` contains the nonstandard method `empty()` to provide the check needed by the comparison operators.  
 
 ### References
-[2] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3840.pdf) (PDF).1 January 2014.  
-[3] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2 [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
+[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3840.pdf) (PDF).1 January 2014.  
+[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2 [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
 
 
 Appendix
@@ -124,7 +134,6 @@ Appendix
 ### A.1 Observer Ptr test specification
 
 ```
-Disallows to delete the observer_ptr (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS)
 Disallows construction from an observer_ptr of incompatible type (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS)
 Allows default construction
 Allows construction from nullptr
@@ -133,8 +142,8 @@ Allows construction from an observer_ptr of compatible type
 Allows to retrieve the pointer
 Allows to retrieve the value pointed to
 Allows to retrieve the member pointed to
-Allows to test for a non-null pointer via conversion to bool (explicitly if available)
-Allows to convert to the observed pointer (explicitly if available)
+Allows to test for a non-null pointer via conversion to bool
+Allows to convert to the observed pointer
 Allows to reset to stop observing
 Allows to reset to observe another pointer
 Allows to swap two observers

@@ -14,6 +14,18 @@
 #include <algorithm>
 #include <functional>
 
+#define  observer_ptr_VERSION "0.0.0"
+
+// Configuration:
+
+#ifndef  nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
+# define nop_FEATURE_ALLOW_IMPLICIT_CONVERSION  0
+#endif
+
+#ifndef  nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
+# define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS  0
+#endif
+
 // Compiler detection:
 
 #if defined(_MSC_VER)
@@ -44,11 +56,11 @@
 # define nop_HAVE_CONSTEXPR_14  1
 #endif
 
-#if nop_CPP11_OR_GREATER
+#if nop_CPP11_OR_GREATER || nop_COMPILER_MSVC_VERSION >= 14
 # define nop_HAVE_EXPLICIT_CONVERSION  1
 #endif
 
-#if nop_CPP11_OR_GREATER
+#if nop_CPP11_OR_GREATER || nop_COMPILER_MSVC_VERSION >= 14
 # define nop_HAVE_NOEXCEPT  1
 #endif
 
@@ -138,14 +150,33 @@ public:
         return ptr;
     }
 
-    nop_constexpr14 nop_explicit operator bool() const nop_noexcept
+#if nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
+
+    nop_constexpr14 operator bool() const nop_noexcept
     {
-        return ptr != nop_NULLPTR;
+        return ! empty();
     }
 
-    nop_constexpr14 nop_explicit operator pointer() const nop_noexcept
+    nop_constexpr14 operator pointer() const nop_noexcept
     {
         return ptr;
+    }
+#elif nop_HAVE_EXPLICIT_CONVERSION
+
+    nop_constexpr14 explicit operator bool() const nop_noexcept
+    {
+        return ! empty();
+    }
+
+    nop_constexpr14 explicit operator pointer() const nop_noexcept
+    {
+        return ptr;
+    }
+#endif
+
+    nop_constexpr14 bool empty() const nop_noexcept
+    {
+        return ptr == nop_NULLPTR;
     }
 
     nop_constexpr14 pointer release() nop_noexcept
@@ -201,25 +232,25 @@ bool operator!=( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 template< class W >
 bool operator==( observer_ptr<W> p, std::nullptr_t ) nop_noexcept
 {
-    return !p;
+    return p.empty();
 }
 
 template< class W >
 bool operator==( std::nullptr_t, observer_ptr<W> p ) nop_noexcept
 {
-    return !p;
+    return p.empty();
 }
 
 template< class W >
 bool operator!=( observer_ptr<W> p, std::nullptr_t ) nop_noexcept
 {
-    return (bool) p;
+    return ! p.empty();
 }
 
 template< class W >
 bool operator!=( std::nullptr_t, observer_ptr<W> p ) nop_noexcept
 {
-    return (bool) p;
+    return ! p.empty();
 }
 #endif
 
