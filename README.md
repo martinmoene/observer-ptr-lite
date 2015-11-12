@@ -64,6 +64,35 @@ Installation
 
 Building the tests
 ------------------
+To build the tests you need:
+
+- [CMake](http://cmake.org), version 2.8.7 or later to be installed and in your PATH.
+- A [suitable compiler](#reported-to-work-with). 
+
+The [*lest* test framework](https://github.com/martinmoene/lest)  is included in the [test folder](test).
+ 
+The following steps assume that the [*observer-ptr* source code](https://github.com/martinmoene/observer-ptr) has been cloned into a directory named `c:\observer-ptr`.
+
+1. Create a directory for the build outputs for a particular architecture.  
+Here we use c:\observer-ptr\build-win-x86-vc10.
+
+        cd c:\observer-ptr
+        md build-win-x86-vc10
+        cd build-win-x86-vc10
+
+2. Configure CMake to use the compiler of your choice (run `cmake --help` for a list).
+
+        cmake -G "Visual Studio 10 2010" ..
+
+3. Build the test suite in the Debug configuration (alternatively use Release).    
+
+        cmake --build . --config Debug
+
+4. Run the test suite.    
+
+        ctest -V -C Debug
+
+All tests should pass, indicating your platform is supported and you are ready to use *observer-ptr*.
 
 
 Synopsis
@@ -71,8 +100,8 @@ Synopsis
 
 ### Configuration macros
 
-\-D<b>gsl\_CONFIG\_CONFIRMS\_COMPILATION\_ERRORS</b>=0  
-Define this macro to 1 to experience the by-design compile-time errors of the GSL components in the test suite. Default is 0.
+\-D<b>nop\_CONFIG\_CONFIRMS\_COMPILATION\_ERRORS</b>=0  
+Define this macro to 1 to experience the by-design compile-time errors of the *observer-ptr* components in the test suite. Default is 0.
 
 
 Other open source implementations
