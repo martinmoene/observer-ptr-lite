@@ -10,7 +10,7 @@ include_directories  ( "${PROJECT_SOURCE_DIR}/../include" )
 
 set( SOURCES observer_ptr.t.cpp )
 
-add_executable (   observer_ptr.t ${SOURCES} ) )
+add_executable ( observer_ptr.t ${SOURCES} )
 
 set( SINGLE_TEST_PROGRAM TRUE )
 
