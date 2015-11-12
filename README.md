@@ -1,4 +1,4 @@
-# observer_ptr<> for C++98, C++03, C++11, C++14 &ensp; [![Build Status](https://travis-ci.org/martinmoene/observer-ptr.svg?branch=master)](https://travis-ci.org/martinmoene/observer-ptr) [![Build status](https://ci.appveyor.com/api/projects/status/6icjotc617wmhljt/branch/master?svg=true)](https://ci.appveyor.com/project/martinmoene/observer-ptr/branch/master)
+# observer_ptr<> for C++98 up &ensp; [![Build Status](https://travis-ci.org/martinmoene/observer-ptr.svg?branch=master)](https://travis-ci.org/martinmoene/observer-ptr) [![Build status](https://ci.appveyor.com/api/projects/status/6icjotc617wmhljt/branch/master?svg=true)](https://ci.appveyor.com/project/martinmoene/observer-ptr/branch/master)
 
 **Contents**  
 - [Example usage](#example-usage)
