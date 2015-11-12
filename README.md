@@ -8,7 +8,7 @@
 - [Installation](#installation)
 - [Building the tests](#building-the-tests)
 - [Synopsis](#synopsis)
-- [Other open source implementations](#other-open-source-implemetations)
+- [Other open source implementations](#other-open-source-implementations)
 - [Notes and references](#notes-and-references)
 - [Appendix](#appendix)
 
