@@ -131,7 +131,7 @@ public:
     nop_constexpr14 explicit observer_ptr( pointer p ) nop_noexcept
     : ptr(p) {}
 
-    template <class W2>
+    template< class W2 >
     nop_constexpr14 observer_ptr(observer_ptr<W2> other ) nop_noexcept
     : ptr( other.get() ) {}
 
@@ -224,7 +224,7 @@ observer_ptr<W> make_observer( W * p ) nop_noexcept
     return observer_ptr<W>( p );
 }
 
-template <class W1, class W2>
+template< class W1, class W2 >
 bool operator==( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
     return p1.get() == p2.get();
