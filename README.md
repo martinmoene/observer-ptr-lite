@@ -110,7 +110,7 @@ Define this macro to 1 to experience the by-design compile-time errors of the *o
 ### Feature selection macros
 
 \-D<b>nop\_FEATURE\_ALLOW\_IMPLICIT\_CONVERSION</b>=0  
-The `observer_ptr` from the C++17 draft provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these conversions at default. If you still want them, define this macro to 1. Default is 0. ([Note 2](#note2))
+The `observer_ptr` from the C++17 draft provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these implicit conversions at default. If you still want them, define this macro to 1. Without these implicit conversions enabled, a conversion to bool via the [safe bool idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Safe_bool) is provided. Default is 0.
 
 
 Other open source implementations
@@ -122,7 +122,6 @@ Notes and references
 --------------------
 ### Notes
 <a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer.*  
-<a id="note2"></a>Note 2. As a side effect, `observer_ptr<>` contains the nonstandard method `empty()` to provide the check needed by the comparison operators.  
 
 ### References
 [1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3840.pdf) (PDF).1 January 2014.  
@@ -134,7 +133,11 @@ Appendix
 ### A.1 Observer Ptr test specification
 
 ```
-Disallows construction from an observer_ptr of incompatible type (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS)
+Disallows to delete the observer_ptr unless implicit conversion allowed
+Disallows construction from an observer_ptr of incompatible type
+Disallows implicit conversion to bool unless implicit conversion allowed
+Disallows implicit conversion to underlying type unless implicit conversion allowed
+Disallows comparison to a observer_ptr with a different underlying type
 Allows default construction
 Allows construction from nullptr
 Allows construction from a non-null pointer

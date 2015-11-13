@@ -21,7 +21,7 @@ CASE( "__cplusplus" )
     EXPECT( __cplusplus > 0L );
 }
 
-CASE( "Disallows to delete the observer_ptr (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS) [.]" )
+CASE( "Disallows to delete the observer_ptr unless implicit conversion allowed" )
 {
 #if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
     int a = 7;
@@ -31,13 +31,56 @@ CASE( "Disallows to delete the observer_ptr (define nop_CONFIG_CONFIRMS_COMPILAT
 #endif
 }
 
-CASE( "Disallows construction from an observer_ptr of incompatible type (define nop_CONFIG_CONFIRMS_COMPILATION_ERRORS)" )
+CASE( "Disallows construction from an observer_ptr of incompatible type" )
 {
 #if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
     int a = 7;
 
     observer_ptr<int>  ap( &a );
     observer_ptr<long> bp( ap );
+#endif
+}
+
+CASE( "Disallows implicit conversion to bool unless implicit conversion allowed" )
+{
+#if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
+# if nop_HAVE_EXPLICIT_CONVERSION
+    EXPECT( !!"no compilation failure: implicit conversion never used for C++11 (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+# elif nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
+    EXPECT( !!"no compilation failure: implicit conversion allowed for pre-C++11 (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+# endif
+    int a = 7;
+
+    observer_ptr<int> ap( &a );
+    
+    if ( ap ) {}
+#endif
+}
+
+CASE( "Disallows implicit conversion to underlying type unless implicit conversion allowed" )
+{
+#if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
+# if nop_HAVE_EXPLICIT_CONVERSION
+    EXPECT( !!"no compilation failure: implicit conversion never used for C++11 (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+# elif nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
+    EXPECT( !!"no compilation failure: implicit conversion allowed for pre-C++11 (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+# endif
+    struct F { static void use( int * ) {} };
+    int a = 7;
+    observer_ptr<int> ap( &a );
+    
+    F::use( ap );
+#endif
+}
+
+CASE( "Disallows comparison to a observer_ptr with a different underlying type" )
+{
+#if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
+    int  a = 7; observer_ptr<int > ap( &a );
+    long b = 9; observer_ptr<long> bp( &b );
+    
+    if ( ap == bp ) {}
+    if ( ap != bp ) {}
 #endif
 }
 
@@ -85,7 +128,6 @@ CASE( "Allows construction from an observer_ptr of compatible type" )
 CASE( "Allows to retrieve the pointer" )
 {
     int a = 7;
-
     observer_ptr<int> ap( &a );
 
     EXPECT( ap.get() == &a );
@@ -94,7 +136,6 @@ CASE( "Allows to retrieve the pointer" )
 CASE( "Allows to retrieve the value pointed to" )
 {
     int a = 7;
-
     observer_ptr<int> ap( &a );
 
     EXPECT( *ap == a );
@@ -105,7 +146,6 @@ struct S { S():a(7){} int a; };
 CASE( "Allows to retrieve the member pointed to" )
 {
     S s;
-
     observer_ptr<S> sp( &s );
 
     EXPECT( sp->a == s.a );
@@ -113,15 +153,12 @@ CASE( "Allows to retrieve the member pointed to" )
 
 CASE( "Allows to test for a non-null pointer via conversion to bool" )
 {
-#if nop_HAVE_EXPLICIT_CONVERSION || nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
     int a = 7;
-
     observer_ptr<int> ap( &a );
+    
+    if ( ap ) {}
 
     EXPECT( !!ap );
-#else
-    EXPECT( !!"no explicit (no C++11) or implicit conversion (see nop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
-#endif
 }
 
 CASE( "Allows to convert to the observed pointer" )
