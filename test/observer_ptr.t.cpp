@@ -73,7 +73,7 @@ CASE( "Disallows implicit conversion to underlying type unless implicit conversi
 #endif
 }
 
-CASE( "Disallows comparison to a observer_ptr with a different underlying type" )
+CASE( "Disallows comparison to an observer_ptr with a different underlying type" )
 {
 #if nop_CONFIG_CONFIRMS_COMPILATION_ERRORS
     int  a = 7; observer_ptr<int > ap( &a );

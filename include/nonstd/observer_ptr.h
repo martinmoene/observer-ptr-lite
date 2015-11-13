@@ -156,24 +156,7 @@ public:
     {
         return ptr != nop_NULLPTR;
     }
-#elif nop_FEATURE_ALLOW_IMPLICIT_CONVERSION
-    // note: operator safe_bool can't coexist with implicit conversion to pointer
 
-    nop_constexpr14 operator bool() const nop_noexcept
-    {
-        return ptr != nop_NULLPTR;
-    }
-#else
-    typedef void (observer_ptr::*safe_bool)() const;
-    void this_type_does_not_support_comparisons() const {}
-
-    operator safe_bool() const
-    {
-        return ptr != nop_NULLPTR ? &observer_ptr::this_type_does_not_support_comparisons : 0;
-    }
-#endif
-
-#if nop_HAVE_EXPLICIT_CONVERSION
     nop_constexpr14 explicit operator pointer() const nop_noexcept
     {
         return ptr;
@@ -185,7 +168,13 @@ public:
         return ptr;
     }
 #else
-    // note: a private implicit conversion to pointer can't coexist with operator safe_bool.
+    typedef void (observer_ptr::*safe_bool)() const;
+    void this_type_does_not_support_comparisons() const {}
+
+    nop_constexpr14 operator safe_bool() const nop_noexcept
+    {
+        return ptr != nop_NULLPTR ? &observer_ptr::this_type_does_not_support_comparisons : 0;
+    }
 #endif
 
     nop_constexpr14 pointer release() nop_noexcept
