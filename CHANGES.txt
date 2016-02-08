@@ -1,5 +1,10 @@
 Changes for observert_ptr for C++98/03 and higher.
 
-version 0.0 2015-11-12
+0.1.0 2016-02-08
+
+Fix: Define own version of common_type if possible and use it in ordered comparisons.
+Fix: Allow different observed types with comparisons.
+
+0.0.0 2015-11-12
 
 Initial release.

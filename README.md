@@ -126,6 +126,7 @@ Notes and references
 ### References
 [1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3840.pdf) (PDF).1 January 2014.  
 [2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2 [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
+[3] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
 
 
 Appendix
@@ -137,7 +138,7 @@ Disallows to delete the observer_ptr unless implicit conversion allowed
 Disallows construction from an observer_ptr of incompatible type
 Disallows implicit conversion to bool unless implicit conversion allowed
 Disallows implicit conversion to underlying type unless implicit conversion allowed
-Disallows comparison to a observer_ptr with a different underlying type
+Disallows comparison to an observer_ptr with a different underlying type
 Allows default construction
 Allows construction from nullptr
 Allows construction from a non-null pointer
@@ -153,12 +154,18 @@ Allows to swap two observers
 Specialized: Allows to swap two observers
 Specialized: Allows to make an observer
 Specialized: Allows to compare if an observer is equal to another observer
+Specialized: Allows to compare if an observer is equal to another observer with a related watched type
 Specialized: Allows to compare if an observer is not equal to another observer
+Specialized: Allows to compare if an observer is not equal to another observer with a related watched type
 Specialized: Allows to compare if an observer is equal to nullptr
 Specialized: Allows to compare if an observer is not equal to nullptr
 Specialized: Allows to compare if an observer is less than another observer
+Specialized: Allows to compare if an observer is less than another observer with a related watched type
 Specialized: Allows to compare if an observer is less than or equal to another observer
+Specialized: Allows to compare if an observer is less than or equal to another observer with a related watched type
 Specialized: Allows to compare if an observer is greater than another observer
+Specialized: Allows to compare if an observer is greater than another observer with a related watched type
 Specialized: Allows to compare if an observer is greater than or equal to another observer
+Specialized: Allows to compare if an observer is greater than or equal to another observer with a related watched type
 Specialized: Allows to compute hash
 ```

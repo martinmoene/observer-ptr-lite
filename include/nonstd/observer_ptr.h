@@ -1,4 +1,4 @@
-// Copyright 2015 by Martin Moene
+// Copyright 2015, 2016 by Martin Moene
 //
 // nonstd::observer_ptr<> is a C++98 onward implementation for std::observer_ptr as of C++17.
 //
@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <functional>
 
-#define  observer_ptr_VERSION "0.0.0"
+#define  observer_ptr_VERSION "0.1.0"
 
 // Configuration:
 
@@ -70,11 +70,16 @@
 
 // Presence of C++ library features:
 
-// For the rest, consider VC12, VC14 as C++11 for GSL Lite:
+// For the rest, consider VC12, VC14 as C++11 for observer_ptr<>:
 
 #if nop_COMPILER_MSVC_VERSION >= 12
 # undef  nop_CPP11_OR_GREATER
 # define nop_CPP11_OR_GREATER  1
+#endif
+
+#if nop_CPP11_OR_GREATER || nop_COMPILER_MSVC_VERSION >= 11
+# define nop_HAVE_STD_DECAY    1
+# define nop_HAVE_STD_DECLVAL  1
 #endif
 
 // C++ feature usage:
@@ -107,6 +112,14 @@
 # define nop_NULLPTR nullptr
 #else
 # define nop_NULLPTR NULL
+#endif
+
+// common_type:
+
+#if nop_HAVE_STD_DECAY && nop_HAVE_STD_DECLVAL
+# define nop_HAVE_OWN_COMMON_TYPE  1
+# include <type_traits>  // std::decay
+# include <utility>      // std::declval
 #endif
 
 namespace nonstd
@@ -252,28 +265,39 @@ bool operator!=( std::nullptr_t, observer_ptr<W> p ) nop_noexcept
 }
 #endif
 
+namespace detail
+{
+#if nop_HAVE_OWN_COMMON_TYPE
+    template< class T, class U >
+    struct common_type { typedef typename std::decay< decltype(true ? std::declval<T>() : std::declval<U>()) >::type type; };
+#else
+    template< class T, class U >
+    struct common_type { typedef T type; };
+#endif
+} // namespace detail
+
 template< class W1, class W2 >
 bool operator<( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
-    return std::less<W1*>()( p1.get(), p2.get() );
     // return std::less<W3>()( p1.get(), p2.get() );
     // where W3 is the composite pointer type (C++14 §5) of W1* and W2*.
+    return std::less< typename detail::common_type<W1*,W2*>::type >()( p1.get(), p2.get() );
 }
 
-template< class W >
-bool operator>( observer_ptr<W> p1, observer_ptr<W> p2 )
+template< class W1, class W2 >
+bool operator>( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
     return p2 < p1;
 }
 
-template< class W >
-bool operator<=( observer_ptr<W> p1, observer_ptr<W> p2 )
+template< class W1, class W2 >
+bool operator<=( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
     return !( p2 < p1 );
 }
 
-template< class W >
-bool operator>=( observer_ptr<W> p1, observer_ptr<W> p2 )
+template< class W1, class W2 >
+bool operator>=( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
     return !( p1 < p2 );
 }

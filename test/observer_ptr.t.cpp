@@ -1,4 +1,4 @@
-// Copyright 2015 by Martin Moene
+// Copyright 2015, 2016 by Martin Moene
 //
 // nonstd::observer_ptr<> is a C++98 onward implementation for std::observer_ptr as of C++17.
 //
@@ -117,12 +117,16 @@ CASE( "Allows construction from a non-null pointer" )
 
 CASE( "Allows construction from an observer_ptr of compatible type" )
 {
+#if nop_COMPILER_MSVC_VERSION != 6
     int  a = 7;
 
     observer_ptr<int>       ap( &a );
     observer_ptr<const int> bp( ap );
 
     EXPECT( *bp == a );
+#else
+    EXPECT( !!"not in VC6 " );
+#endif
 }
 
 CASE( "Allows to retrieve the pointer" )
@@ -244,12 +248,40 @@ CASE( "Specialized: Allows to compare if an observer is equal to another observe
 #endif
 }
 
+CASE( "Specialized: Allows to compare if an observer is equal to another observer with a related watched type" )
+{
+#if nop_COMPILER_MSVC_VERSION != 6
+    int a = 7, b = 9;
+    observer_ptr<      int> ap( &a );
+    observer_ptr<const int> bp( &b );
+
+    EXPECT(     ap == ap );
+    EXPECT_NOT( ap == bp );
+#else
+    EXPECT( !!"op== yields 'operator ==' is ambiguous for VC6 " );
+#endif
+}
+
 CASE( "Specialized: Allows to compare if an observer is not equal to another observer" )
 {
 #if nop_COMPILER_MSVC_VERSION != 6
     int a = 7, b= 9;
     observer_ptr<int> ap( &a );
     observer_ptr<int> bp( &b );
+
+    EXPECT(     ap != bp );
+    EXPECT_NOT( ap != ap );
+#else
+    EXPECT( !!"op== yields 'operator !=' is ambiguous for VC6 " );
+#endif
+}
+
+CASE( "Specialized: Allows to compare if an observer is not equal to another observer with a related watched type" )
+{
+#if nop_COMPILER_MSVC_VERSION != 6
+    int a = 7, b= 9;
+    observer_ptr<int> ap( &a );
+    observer_ptr<const int> bp( &b );
 
     EXPECT(     ap != bp );
     EXPECT_NOT( ap != ap );
@@ -300,6 +332,20 @@ CASE( "Specialized: Allows to compare if an observer is less than another observ
     EXPECT_NOT( p2 < p1 );
 }
 
+CASE( "Specialized: Allows to compare if an observer is less than another observer with a related watched type" )
+{
+#if nop_HAVE_OWN_COMMON_TYPE
+    int arr[] = { 7, 9, };
+    observer_ptr<      int> p1( &arr[0] );
+    observer_ptr<const int> p2( &arr[1] );
+
+    EXPECT(     p1 < p2 );
+    EXPECT_NOT( p2 < p1 );
+#else
+    EXPECT( !!"common_type is not available (no C++11, no VC12, 13, 14)" );
+#endif
+}
+
 CASE( "Specialized: Allows to compare if an observer is less than or equal to another observer" )
 {
     int arr[] = { 7, 9, };
@@ -309,6 +355,21 @@ CASE( "Specialized: Allows to compare if an observer is less than or equal to an
     EXPECT(     p1 <= p1 );
     EXPECT(     p1 <= p2 );
     EXPECT_NOT( p2 <= p1 );
+}
+
+CASE( "Specialized: Allows to compare if an observer is less than or equal to another observer with a related watched type" )
+{
+#if nop_HAVE_OWN_COMMON_TYPE
+    int arr[] = { 7, 9, };
+    observer_ptr<      int> p1( &arr[0] );
+    observer_ptr<const int> p2( &arr[1] );
+
+    EXPECT(     p1 <= p1 );
+    EXPECT(     p1 <= p2 );
+    EXPECT_NOT( p2 <= p1 );
+#else
+    EXPECT( !!"common_type is not available (no C++11, no VC12, 13, 14)" );
+#endif
 }
 
 CASE( "Specialized: Allows to compare if an observer is greater than another observer" )
@@ -321,6 +382,20 @@ CASE( "Specialized: Allows to compare if an observer is greater than another obs
     EXPECT_NOT( p1 > p2 );
 }
 
+CASE( "Specialized: Allows to compare if an observer is greater than another observer with a related watched type" )
+{
+#if nop_HAVE_OWN_COMMON_TYPE
+    int arr[] = { 7, 9, };
+    observer_ptr<      int> p1( &arr[0] );
+    observer_ptr<const int> p2( &arr[1] );
+
+    EXPECT(     p2 > p1 );
+    EXPECT_NOT( p1 > p2 );
+#else
+    EXPECT( !!"common_type is not available (no C++11, no VC12, 13, 14)" );
+#endif
+}
+
 CASE( "Specialized: Allows to compare if an observer is greater than or equal to another observer" )
 {
     int arr[] = { 7, 9, };
@@ -330,6 +405,21 @@ CASE( "Specialized: Allows to compare if an observer is greater than or equal to
     EXPECT(     p1 >= p1 );
     EXPECT(     p2 >= p1 );
     EXPECT_NOT( p1 >= p2 );
+}
+
+CASE( "Specialized: Allows to compare if an observer is greater than or equal to another observer with a related watched type" )
+{
+#if nop_HAVE_OWN_COMMON_TYPE
+    int arr[] = { 7, 9, };
+    observer_ptr<      int> p1( &arr[0] );
+    observer_ptr<const int> p2( &arr[1] );
+
+    EXPECT(     p1 >= p1 );
+    EXPECT(     p2 >= p1 );
+    EXPECT_NOT( p1 >= p2 );
+#else
+    EXPECT( !!"common_type is not available (no C++11, no VC12, 13, 14)" );
+#endif
 }
 
 CASE( "Specialized: Allows to compute hash" )
