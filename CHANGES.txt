@@ -1,9 +1,12 @@
 Changes for observert_ptr for C++98/03 and higher.
 
+0.2.0 2016-02-10
+
+Expanded ordered comparison of related types to pre-C++11 usage of GCC through the use of __typeof__.
+
 0.1.0 2016-02-08
 
-Fix: Define own version of common_type if possible and use it in ordered comparisons.
-Fix: Allow different observed types with comparisons.
+Added ordered comparison of related types through the use of common_type.
 
 0.0.0 2015-11-12
 

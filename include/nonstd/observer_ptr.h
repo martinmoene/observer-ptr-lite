@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <functional>
 
-#define  observer_ptr_VERSION "0.1.0"
+#define  observer_ptr_VERSION "0.2.0"
 
 // Configuration:
 
@@ -35,13 +35,8 @@
 # define nop_COMPILER_NON_MSVC       1
 #endif
 
-#if ( __cplusplus >= 201103L )
-# define nop_CPP11_OR_GREATER  1
-#endif
-
-#if ( __cplusplus >= 201402L )
-# define nop_CPP14_OR_GREATER  1
-#endif
+#define nop_CPP11_OR_GREATER  ( __cplusplus >= 201103L )
+#define nop_CPP14_OR_GREATER  ( __cplusplus >= 201402L )
 
 // half-open range [lo..hi):
 #define nop_BETWEEN( v, lo, hi ) ( lo <= v && v < hi )
@@ -66,6 +61,10 @@
 
 #if nop_CPP11_OR_GREATER || nop_COMPILER_MSVC_VERSION >= 10
 # define nop_HAVE_NULLPTR  1
+#endif
+
+#if defined( __GNUC__ )
+# define nop_HAVE_TYPEOF  1
 #endif
 
 // Presence of C++ library features:
@@ -117,9 +116,13 @@
 // common_type:
 
 #if nop_HAVE_STD_DECAY && nop_HAVE_STD_DECLVAL
-# define nop_HAVE_OWN_COMMON_TYPE  1
 # include <type_traits>  // std::decay
 # include <utility>      // std::declval
+# define nop_HAVE_OWN_COMMON_TYPE      1
+# define nop_HAVE_OWN_COMMON_TYPE_STD  1
+#elif nop_HAVE_TYPEOF
+# define nop_HAVE_OWN_COMMON_TYPE         1
+# define nop_HAVE_OWN_COMMON_TYPE_TYPEOF  1
 #endif
 
 namespace nonstd
@@ -267,11 +270,12 @@ bool operator!=( std::nullptr_t, observer_ptr<W> p ) nop_noexcept
 
 namespace detail
 {
-#if nop_HAVE_OWN_COMMON_TYPE
     template< class T, class U >
+#if nop_HAVE_OWN_COMMON_TYPE_STD
     struct common_type { typedef typename std::decay< decltype(true ? std::declval<T>() : std::declval<U>()) >::type type; };
-#else
-    template< class T, class U >
+#elif nop_HAVE_OWN_COMMON_TYPE_TYPEOF
+    struct common_type { typedef __typeof__( true ? T() : U() ) type; };
+#else // fall back
     struct common_type { typedef T type; };
 #endif
 } // namespace detail
