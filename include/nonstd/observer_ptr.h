@@ -28,18 +28,18 @@
 
 // Compiler detection:
 
+#define nop_CPP11_OR_GREATER  ( __cplusplus >= 201103L )
+#define nop_CPP14_OR_GREATER  ( __cplusplus >= 201402L )
+
+// half-open range [lo..hi):
+#define nop_BETWEEN( v, lo, hi ) ( lo <= v && v < hi )
+
 #if defined(_MSC_VER)
 # define nop_COMPILER_MSVC_VERSION   (_MSC_VER / 100 - 5 - (_MSC_VER < 1900))
 #else
 # define nop_COMPILER_MSVC_VERSION   0
 # define nop_COMPILER_NON_MSVC       1
 #endif
-
-#define nop_CPP11_OR_GREATER  ( __cplusplus >= 201103L )
-#define nop_CPP14_OR_GREATER  ( __cplusplus >= 201402L )
-
-// half-open range [lo..hi):
-#define nop_BETWEEN( v, lo, hi ) ( lo <= v && v < hi )
 
 // Presence of C++ language features:
 
