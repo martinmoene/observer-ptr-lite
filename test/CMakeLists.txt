@@ -15,7 +15,7 @@ add_executable ( observer_ptr.t ${SOURCES} )
 set( SINGLE_TEST_PROGRAM TRUE )
 
 # GNU: have -std=c++14 and lower?
-if( ${CMAKE_CXX_COMPILER_ID} MATCHES "GNU" )
+if( CMAKE_CXX_COMPILER_ID MATCHES "GNU" )
     execute_process(
         COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
 
@@ -25,11 +25,11 @@ if( ${CMAKE_CXX_COMPILER_ID} MATCHES "GNU" )
     endif()
 endif()
 
-if( ${CMAKE_CXX_COMPILER_ID} MATCHES "MSVC" )
+if( MSVC )
     add_compile_options( -W3 -EHsc )
 
-elseif( ${CMAKE_CXX_COMPILER_ID} MATCHES "GNU" OR
-        ${CMAKE_CXX_COMPILER_ID} MATCHES "Clang" )
+elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR
+        CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
     add_executable( observer_ptr-cpp98.t ${SOURCES} )
     add_executable( observer_ptr-cpp03.t ${SOURCES} )
     add_executable( observer_ptr-cpp11.t ${SOURCES} )
@@ -42,7 +42,7 @@ elseif( ${CMAKE_CXX_COMPILER_ID} MATCHES "GNU" OR
     target_compile_options( observer_ptr-cpp11.t  PUBLIC -std=c++11 )
     target_compile_options( observer_ptr-cpp14.t  PUBLIC -std=c++14 )
 
-elseif( ${CMAKE_CXX_COMPILER_ID} MATCHES "Intel" )
+elseif( CMAKE_CXX_COMPILER_ID MATCHES "Intel" )
 # as is
 else()
 # as is
