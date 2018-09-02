@@ -1,6 +1,6 @@
 observer_ptr<> for C++98 up
 ===========================
-[![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/)  [![Standard](https://img.shields.io/badge/c%2B%2B-98-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![Standard](https://img.shields.io/badge/c%2B%2B-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![Standard](https://img.shields.io/badge/c%2B%2B-14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/martinmoene/observer-ptr.svg?branch=master)](https://travis-ci.org/martinmoene/observer-ptr) [![Build status](https://ci.appveyor.com/api/projects/status/6icjotc617wmhljt/branch/master?svg=true)](https://ci.appveyor.com/project/martinmoene/observer-ptr/branch/master) [![Version](https://badge.fury.io/gh/martinmoene%2Fobserver-ptr.svg)](https://github.com/martinmoene/observer-ptr/releases) [![download](https://img.shields.io/badge/latest%20version%20%20-download-blue.svg)](https://raw.githubusercontent.com/martinmoene/observer-ptr/master/include/nonstd/observer_ptr.h)
+[![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/)  [![Standard](https://img.shields.io/badge/c%2B%2B-98-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![Standard](https://img.shields.io/badge/c%2B%2B-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![Standard](https://img.shields.io/badge/c%2B%2B-14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![License](https://img.shields.io/badge/license-BSL-blue.svg)](https://opensource.org/licenses/BSL-1.0) [![Build Status](https://travis-ci.org/martinmoene/observer-ptr.svg?branch=master)](https://travis-ci.org/martinmoene/observer-ptr) [![Build status](https://ci.appveyor.com/api/projects/status/6icjotc617wmhljt/branch/master?svg=true)](https://ci.appveyor.com/project/martinmoene/observer-ptr/branch/master) [![Version](https://badge.fury.io/gh/martinmoene%2Fobserver-ptr.svg)](https://github.com/martinmoene/observer-ptr/releases) [![download](https://img.shields.io/badge/latest%20version%20%20-download-blue.svg)](https://raw.githubusercontent.com/martinmoene/observer-ptr/master/include/nonstd/observer_ptr.h)
 
 *observer-ptr* is a single-file header-only library with a variant of    std::observer_ptr [[1](#ref1)] for C++98 and later.
 
@@ -53,7 +53,7 @@ The *observer-ptr* of this project can be used with probably any clang, g++ or M
 
 License
 -------
-*observer-ptr* uses the [MIT](LICENSE) license.
+*observer-ptr* is distributed under the [Boost Software License](LICENSE.txt).
  
 
 Dependencies

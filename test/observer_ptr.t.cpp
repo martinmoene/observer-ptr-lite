@@ -1,8 +1,9 @@
-// Copyright 2015, 2016 by Martin Moene
+// Copyright 2013-2018 by Martin Moene
 //
 // nonstd::observer_ptr<> is a C++98 onward implementation for std::observer_ptr as of C++17.
 //
-// This code is licensed under the MIT License (MIT).
+// Distributed under the Boost Software License, Version 1.0. 
+// (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
 #include "observer_ptr.t.h"
