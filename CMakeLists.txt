@@ -4,6 +4,10 @@
 
 cmake_minimum_required( VERSION 2.8 )
 
+# observer-ptr version, updated by script/update-version.py:
+
+set( observer_ptr_version "0.2.0" )
+
 project( observer_ptr )
 
 enable_testing()

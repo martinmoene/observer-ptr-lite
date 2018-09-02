@@ -8,6 +8,12 @@
 #include "observer_ptr.t.h"
 #include <iostream>
 
+#define nsop_PRESENT( x ) \
+    std::cout << #x << ": " << x << "\n"
+
+#define nsop_ABSENT( x ) \
+    std::cout << #x << ": (undefined)\n"
+
 lest::tests & specification()
 {
     static lest::tests tests;
@@ -15,6 +21,14 @@ lest::tests & specification()
 }
 
 namespace {
+
+CASE( "observer-ptr version" "[.version]" )
+{
+    nsop_PRESENT( observer_ptr_MAJOR );
+    nsop_PRESENT( observer_ptr_MINOR );
+    nsop_PRESENT( observer_ptr_PATCH );
+    nsop_PRESENT( observer_ptr_VERSION );
+}
 
 CASE( "__cplusplus" )
 {
