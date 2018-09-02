@@ -14,7 +14,14 @@
 #include <algorithm>
 #include <functional>
 
-#define  observer_ptr_VERSION "0.2.0"
+#define observer_ptr_MAJOR  0
+#define observer_ptr_MINOR  2
+#define observer_ptr_PATCH  0
+
+#define observer_ptr_VERSION  nsop_STRINGIFY(observer_ptr_MAJOR) "." nsop_STRINGIFY(observer_ptr_MINOR) "." nsop_STRINGIFY(observer_ptr_PATCH)
+
+#define nsop_STRINGIFY(  x )  nsop_STRINGIFY_( x )
+#define nsop_STRINGIFY_( x )  #x
 
 // Configuration:
 

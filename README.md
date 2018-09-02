@@ -20,7 +20,7 @@ observer_ptr<> for C++98 up
 Example usage
 -------------
 ```
-#include "nonstd/observer_ptr.h"
+#include "nonstd/observer_ptr.hpp"
 
 using namespace nonstd;
 

@@ -29,7 +29,8 @@
 		<Unit filename="../LICENSE" />
 		<Unit filename="../README.md" />
 		<Unit filename="../example/01-basic.cpp" />
-		<Unit filename="../include/nonstd/observer_ptr.h" />
+		<Unit filename="../include/nonstd/observer_ptr.hpp" />
+		<Unit filename="../script/update-version.py" />
 		<Unit filename="../test/CMakeLists.txt" />
 		<Unit filename="../test/lest_cpp03.hpp" />
 		<Unit filename="../test/observer_ptr.t.cpp" />

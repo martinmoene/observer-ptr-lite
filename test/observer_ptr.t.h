@@ -10,7 +10,7 @@
 #ifndef TEST_NONSTD_OBSERVER_PTR_H_INCLUDED
 #define TEST_NONSTD_OBSERVER_PTR_H_INCLUDED
 
-#include "nonstd/observer_ptr.h"
+#include "nonstd/observer_ptr.hpp"
 #include "lest_cpp03.hpp"
 
 using namespace nonstd;
