@@ -11,16 +11,24 @@
 #ifndef TEST_NONSTD_OBSERVER_PTR_H_INCLUDED
 #define TEST_NONSTD_OBSERVER_PTR_H_INCLUDED
 
-#include "nonstd/observer_ptr.hpp"
+#include "observer_ptr.hpp"
 #include "lest_cpp03.hpp"
 
 using namespace nonstd;
 
 #define CASE( name ) lest_CASE( specification(), name )
 
-extern lest::tests & specification();
+// Attribute externally visible for -fwhole-program:
 
-#if ! nop_BETWEEN( nop_COMPILER_MSVC_VERSION, 6, 7 )
+#if defined(__GNUC__) && !defined(__clang__)
+# define nsop_ATTRIBUTE_EXT_VIS  __attribute__((externally_visible))
+#else
+# define nsop_ATTRIBUTE_EXT_VIS
+#endif
+
+extern lest::tests & specification() nsop_ATTRIBUTE_EXT_VIS;
+
+#if ! nsop_BETWEEN( nsop_COMPILER_MSVC_VERSION, 6, 7 )
 namespace std {
 #else
 namespace lest {
@@ -33,7 +41,7 @@ inline std::ostream & operator<<( std::ostream & os, observer_ptr<W> const & p )
     return os << "[observer_ptr:" << ( !!p.get() ? to_string(*p):"(empty)") << "]";
 }
 
-#if ! nop_BETWEEN( nop_COMPILER_MSVC_VERSION, 6, 7 )
+#if ! nsop_BETWEEN( nsop_COMPILER_MSVC_VERSION, 6, 7 )
 } // namespace std
 #else
 } // namespace lest

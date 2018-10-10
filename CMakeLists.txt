@@ -9,7 +9,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 set( observer_ptr_version "0.2.0" )
 
-project( observer_ptr )
+project( observer_ptr LANGUAGES CXX )
 
 enable_testing()
 

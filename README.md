@@ -108,12 +108,12 @@ Synopsis
 
 ### Configuration macros
 
-\-D<b>nop\_CONFIG\_CONFIRMS\_COMPILATION\_ERRORS</b>=0  
+\-D<b>nsop\_CONFIG\_CONFIRMS\_COMPILATION\_ERRORS</b>=0  
 Define this macro to 1 to experience the by-design compile-time errors of the *observer-ptr* components in the test suite. Default is 0.
 
 ### Feature selection macros
 
-\-D<b>nop\_FEATURE\_ALLOW\_IMPLICIT\_CONVERSION</b>=0  
+\-D<b>nsop\_FEATURE\_ALLOW\_IMPLICIT\_CONVERSION</b>=0  
 The `observer_ptr` from the C++17 draft provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these implicit conversions at default. If you still want them, define this macro to 1. Without these implicit conversions enabled, a conversion to bool via the [safe bool idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Safe_bool) is provided. Default is 0.
 
 
