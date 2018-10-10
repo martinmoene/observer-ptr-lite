@@ -30,7 +30,7 @@ if( MSVC )
     add_compile_options( -W3 -EHsc )
 
 elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR
-        CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+        CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang" )
     add_executable( observer_ptr-cpp98.t ${SOURCES} )
     add_executable( observer_ptr-cpp03.t ${SOURCES} )
     add_executable( observer_ptr-cpp11.t ${SOURCES} )
