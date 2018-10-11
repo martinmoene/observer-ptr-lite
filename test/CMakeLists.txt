@@ -5,12 +5,6 @@
 # Distributed under the Boost Software License, Version 1.0. 
 # (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-cmake_minimum_required( VERSION 3.5 )
-
-# Obtain 'AppleClang' in CMAKE_CXX_COMPILER_ID (defaults to OLD):
-
-cmake_policy( SET CMP0025 NEW )
-
 project( test LANGUAGES CXX )
 
 set( MAIN_BASE observer_ptr-main )
@@ -50,7 +44,7 @@ if( MSVC )
     endif()
 
 elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
-    message( STATUS "CompilerId: ${CMAKE_CXX_COMPILER_ID}")
+    message( STATUS "CompilerId: '${CMAKE_CXX_COMPILER_ID}'")
 
     set( HAS_STD_FLAGS  TRUE )
     set( HAS_CPP98_FLAG TRUE )
@@ -123,7 +117,7 @@ endfunction()
 # make target, compile for given standard if specified:
 
 function( make_target target std )
-    message( STATUS "Make target: ${std}" )
+    message( STATUS "Make target: '${std}'" )
 
     add_executable            ( ${target} ${SOURCES} ${HDRPATH} )
     target_compile_options    ( ${target} PRIVATE ${OPTIONS} )
