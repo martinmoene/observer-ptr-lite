@@ -30,6 +30,8 @@ set( HAS_CPP20_FLAG FALSE )
 set( HAS_CPPLATEST_FLAG FALSE )
 
 if( MSVC )
+    message( STATUS "Matched: MSVC")
+    
     set( HAS_STD_FLAGS TRUE )
 
     set( OPTIONS     -W3 -EHsc )
@@ -53,6 +55,8 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
 
     # GNU: available -std flags depends on version
     if( CMAKE_CXX_COMPILER_ID MATCHES "GNU" )
+        message( STATUS "Matched: GNU")
+    
         if( NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8.0 )
             set( HAS_CPP11_FLAG TRUE )
         endif()
@@ -65,6 +69,8 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
 
     # AppleClang: available -std flags depends on version
     elseif( CMAKE_CXX_COMPILER_ID MATCHES "AppleClang" )
+        message( STATUS "Matched: AppleClang")
+    
         if( NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 5.0.0 )
             set( HAS_CPP11_FLAG TRUE )
         endif()
@@ -77,6 +83,8 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
 
     # Clang: available -std flags depends on version
     elseif( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+        message( STATUS "Matched: Clang")
+    
         if( NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.3.0 )
             set( HAS_CPP11_FLAG TRUE )
         endif()
@@ -89,9 +97,11 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
     endif()
 
 elseif( CMAKE_CXX_COMPILER_ID MATCHES "Intel" )
-# as is
+    # as is
+    message( STATUS "Matched: Intel")
 else()
-# as is
+    # as is
+    message( STATUS "Matched: nothing")
 endif()
 
 # enable MS C++ Core Guidelines checker if MSVC:
@@ -108,6 +118,8 @@ endfunction()
 # make target, compile for given standard if specified:
 
 function( make_target target std )
+    message( STATUS "Make target: ${std}" )
+
     add_executable            ( ${target} ${SOURCES} ${HDRPATH} )
     target_compile_options    ( ${target} PRIVATE ${OPTIONS} )
     target_compile_definitions( ${target} PRIVATE ${DEFINITIONS} )
