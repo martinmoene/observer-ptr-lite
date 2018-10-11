@@ -2,8 +2,10 @@
 #
 # https://github.com/martinmoene/observer_ptr
 #
-# Distributed under the Boost Software License, Version 1.0. 
+# Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+cmake_minimum_required( VERSION 3.5 )
 
 project( test LANGUAGES CXX )
 
@@ -29,7 +31,7 @@ set( HAS_CPPLATEST_FLAG FALSE )
 
 if( MSVC )
     message( STATUS "Matched: MSVC")
-    
+
     set( HAS_STD_FLAGS TRUE )
 
     set( OPTIONS     -W3 -EHsc )
@@ -55,7 +57,7 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
     # GNU: available -std flags depends on version
     if( CMAKE_CXX_COMPILER_ID MATCHES "GNU" )
         message( STATUS "Matched: GNU")
-    
+
         if( NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8.0 )
             set( HAS_CPP11_FLAG TRUE )
         endif()
@@ -69,7 +71,7 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
     # AppleClang: available -std flags depends on version
     elseif( CMAKE_CXX_COMPILER_ID MATCHES "AppleClang" )
         message( STATUS "Matched: AppleClang")
-    
+
         if( NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 5.0.0 )
             set( HAS_CPP11_FLAG TRUE )
         endif()
@@ -83,7 +85,7 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
     # Clang: available -std flags depends on version
     elseif( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
         message( STATUS "Matched: Clang")
-    
+
         if( NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.3.0 )
             set( HAS_CPP11_FLAG TRUE )
         endif()
@@ -126,7 +128,7 @@ function( make_target target std )
     if( std )
         if( MSVC )
             target_compile_options( ${target} PRIVATE -std:c++${std} )
-        else()    
+        else()
             # Necessary for clang 3.x:
             target_compile_options( ${target} PRIVATE -std=c++${std} )
             # Ok for clang 4 and later:
