@@ -7,6 +7,10 @@
 
 cmake_minimum_required( VERSION 3.5 )
 
+# Obtain 'AppleClang' in CMAKE_CXX_COMPILER_ID (defaults to OLD):
+
+cmake_policy( SET CMP0025 NEW )
+
 project( test LANGUAGES CXX )
 
 set( MAIN_BASE observer_ptr-main )
