@@ -172,20 +172,6 @@ else()
     endif()
 endif()
 
-# with C++17, honour explicit request for std::any or nonstd::any:
-
-if( HAS_CPP17_FLAG )
-    set( WHICH any_ANY_DEFAULT )
-
-    if( ANY_LITE_OPT_SELECT_STD )
-        set( WHICH any_ANY_STD )
-    elseif( ANY_LITE_OPT_SELECT_NONSTD )
-        set( WHICH any_ANY_NONSTD )
-    endif()
-
-    target_compile_definitions( ${MAIN_BASE}-cpp17.t PRIVATE any_CONFIG_SELECT_ANY=${WHICH} )
-endif()
-
 # configure unit tests via CTest:
 
 enable_testing()
