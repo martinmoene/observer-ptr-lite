@@ -50,6 +50,7 @@ if( MSVC )
     endif()
 
 elseif( CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang" )
+    message( STATUS "CompilerId: ${CMAKE_CXX_COMPILER_ID}")
 
     set( HAS_STD_FLAGS  TRUE )
     set( HAS_CPP98_FLAG TRUE )
