@@ -40,7 +40,7 @@
 #define nsop_CPP14_OR_GREATER  ( __cplusplus >= 201402L )
 
 // half-open range [lo..hi):
-#define nsop_BETWEEN( v, lo, hi ) ( lo <= v && v < hi )
+#define nsop_BETWEEN( v, lo, hi ) ( (lo) <= (v) && (v) < (hi) )
 
 #if defined(_MSC_VER)
 # define nsop_COMPILER_MSVC_VERSION   (_MSC_VER / 100 - 5 - (_MSC_VER < 1900))
