@@ -22,8 +22,8 @@
 
 // observer_ptr configuration:
 
-#ifndef  nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION
-# define nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION  0
+#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION  0
 #endif
 
 #ifndef  nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS
@@ -167,7 +167,7 @@ namespace nonstd {
 #define nsop_HAVE_NOEXCEPT              nsop_CPP11_140
 #define nsop_HAVE_NULLPTR               nsop_CPP11_100
 
-#define nsop_HAVE_TYPEOF  (!!nsop_COMPILER_GNUC_VERSION)
+#define nsop_HAVE_TYPEOF  (nsop_CPP11_000 && nsop_COMPILER_GNUC_VERSION)
 
 // Presence of C++ library features:
 
@@ -267,7 +267,7 @@ public:
     {
         return ptr;
     }
-#elif nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION
+#elif nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION
 
     nsop_constexpr14 operator pointer() const nsop_noexcept
     {

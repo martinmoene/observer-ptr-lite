@@ -38,7 +38,7 @@ CASE( "observer_ptr version" "[.observer_ptr][.version]" )
 
 CASE( "observer_ptr configuration" "[.observer_ptr][.config]" )
 {
-    nsop_PRESENT( nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION );
+    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION );
     nsop_PRESENT( nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS );
     nsop_PRESENT( nsop_HAVE_STD_OBSERVER_PTR );
     nsop_PRESENT( nsop_USES_STD_OBSERVER_PTR );
