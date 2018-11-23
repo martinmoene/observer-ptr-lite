@@ -26,23 +26,6 @@
 # pragma GCC   diagnostic ignored "-Wunused-function"
 #endif
 
-#include <iostream>
-
-#if ! nsop_BETWEEN( nsop_COMPILER_MSVC_VERSION, 60, 70 )
-namespace std {
-#else
-namespace lest {
-#endif
-
-template< typename W >
-inline std::ostream & operator<<( std::ostream & os, nonstd::observer_ptr<W> const & p )
-{
-    using ::lest::to_string;
-    return os << "[observer_ptr:" << ( !!p.get() ? to_string(*p):"(empty)") << "]";
-}
-
-} // namespace std / namespace lest
-
 #include "lest_cpp03.hpp"
 
 #define CASE( name ) lest_CASE( specification(), name )
@@ -56,5 +39,22 @@ inline std::ostream & operator<<( std::ostream & os, nonstd::observer_ptr<W> con
 #endif
 
 extern lest::tests & specification() nsop_ATTRIBUTE_EXT_VIS;
+
+#if nsop_USES_STD_OBSERVER_PTR 
+namespace std {
+#elif ! nsop_BETWEEN( nsop_COMPILER_MSVC_VERSION, 60, 70 )
+namespace std {
+#else
+namespace lest {
+#endif
+
+template< typename W >
+inline std::ostream & operator<<( std::ostream & os, nonstd::observer_ptr<W> const & p )
+{
+    using ::lest::to_string;
+    return os << "[observer_ptr:" << ( !!p.get() ? to_string(*p):"(empty)") << "]";
+}
+
+} // namespace std / namespace lest
 
 #endif // TEST_NONSTD_OBSERVER_PTR_H_INCLUDED
