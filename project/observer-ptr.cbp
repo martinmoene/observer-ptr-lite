@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Observer Ptr" />
+		<Option title="Observer Ptr Lite" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -28,6 +28,7 @@
 		<Unit filename="../CMakeLists.txt" />
 		<Unit filename="../LICENSE.txt" />
 		<Unit filename="../README.md" />
+		<Unit filename="../conanfile.py" />
 		<Unit filename="../example/01-basic.cpp" />
 		<Unit filename="../include/nonstd/observer_ptr.hpp" />
 		<Unit filename="../script/update-version.py" />
@@ -37,6 +38,7 @@
 		<Unit filename="../test/observer_ptr-main.t.hpp" />
 		<Unit filename="../test/observer_ptr.t.cpp" />
 		<Unit filename="../test/t.bat" />
+		<Unit filename="../test/tc.bat" />
 		<Unit filename="../test/tg-all.bat" />
 		<Unit filename="../test/tg.bat" />
 		<Extensions>
