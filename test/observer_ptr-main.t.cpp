@@ -40,6 +40,13 @@ CASE( "observer_ptr configuration" "[.observer_ptr][.config]" )
 {
     nsop_PRESENT( nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION );
     nsop_PRESENT( nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS );
+    nsop_PRESENT( nsop_HAVE_STD_OBSERVER_PTR );
+    nsop_PRESENT( nsop_USES_STD_OBSERVER_PTR );
+    nsop_PRESENT( nsop_CONFIG_SELECT_OBSERVER_PTR );
+    nsop_PRESENT( nsop_OBSERVER_PTR_DEFAULT );
+    nsop_PRESENT( nsop_OBSERVER_PTR_NONSTD );
+    nsop_PRESENT( nsop_OBSERVER_PTR_STD );
+    nsop_PRESENT( nsop_CPLUSPLUS );
 }
 
 CASE( "__cplusplus" "[.stdc++]" )
@@ -49,25 +56,37 @@ CASE( "__cplusplus" "[.stdc++]" )
 
 CASE( "Compiler version" "[.compiler]" )
 {
+#if nsop_USES_STD_OBSERVER_PTR
+    std::cout << "(Compiler version not available: using std::experimental::observer_ptr)\n";
+#else
     nsop_PRESENT( nsop_COMPILER_CLANG_VERSION );
     nsop_PRESENT( nsop_COMPILER_GNUC_VERSION );
     nsop_PRESENT( nsop_COMPILER_MSVC_VERSION );
+#endif
 }
 
 CASE( "Presence of C++ language features" "[.stdlanguage]" )
 {
+#if nsop_USES_STD_OBSERVER_PTR
+    std::cout << "(Presence of C++ language features not available: using std::experimental::observer_ptr)\n";
+#else
     nsop_PRESENT( nsop_HAVE_CONSTEXPR_11 );
     nsop_PRESENT( nsop_HAVE_CONSTEXPR_14 );
     nsop_PRESENT( nsop_HAVE_EXPLICIT_CONVERSION );
     nsop_PRESENT( nsop_HAVE_NOEXCEPT );
     nsop_PRESENT( nsop_HAVE_NULLPTR );
+#endif
 }
 
 CASE( "Presence of C++ library features" "[.stdlibrary]" )
 {
+#if nsop_USES_STD_OBSERVER_PTR
+    std::cout << "(Presence of C++ library features not available: using std::experimental::observer_ptr)\n";
+#else
     nsop_PRESENT( nsop_HAVE_STD_DECAY );
     nsop_PRESENT( nsop_HAVE_STD_DECLVAL );
     nsop_PRESENT( nsop_HAVE_TYPEOF );
+#endif
 
 #if defined _HAS_CPP0X
     nsop_PRESENT( _HAS_CPP0X );
