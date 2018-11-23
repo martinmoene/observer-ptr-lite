@@ -103,15 +103,31 @@ Synopsis
 --------
 
 **Contents**  
+- [Usage](#usage)
 - [Configuration macros](#configuration-macros)
-- [Feature selection macros](#feature-selection-macros)
+
+### Usage
+
+For its usage, see the documentation of [*observer_ptr* at cppreference](https://en.cppreference.com/w/cpp/experimental/observer_ptr).
 
 ### Configuration macros
+
+#### Standard selection macro
+\-D<b>nsop\_CPLUSPLUS</b>=199711L  
+Define this macro to override the auto-detection of the supported C++ standard, or if your compiler does not set the `__cplusplus` macro correctly.
+
+#### Select `std::experimental::observer_ptr` or `nonstd::observer_ptr`
+At default, *observer-ptr lite* uses `std::experimental::observer_ptr` if it is available and lets you use it via namespace `nonstd`. You can however override this default and explicitly request to use `std::experimental::observer_ptr` or *observer-ptr lite*'s `nonstd::observer_ptr` as `nonstd::observer_ptr` via the following macros.
+
+-D<b>nsop\_CONFIG\_SELECT\_OBSERVER_PTR</b>=nsop_OBSERVER_PTR_DEFAULT  
+Define this to `nsop_OBSERVER_PTR_STD` to select `std::experimental::observer_ptr` as `nonstd::observer_ptr`. Define this to `nsop_OBSERVER_PTR_NONSTD` to select `nonstd::observer_ptr` as `nonstd::observer_ptr`. Default is undefined, which has the same effect as defining to `nsop_OBSERVER_PTR_DEFAULT`.
+
+#### Compile-time tests
 
 \-D<b>nsop\_CONFIG\_CONFIRMS\_COMPILATION\_ERRORS</b>=0  
 Define this macro to 1 to experience the by-design compile-time errors of the *observer-ptr* components in the test suite. Default is 0.
 
-### Feature selection macros
+#### Conversions
 
 \-D<b>nsop\_FEATURE\_ALLOW\_IMPLICIT\_CONVERSION</b>=0  
 The `observer_ptr` from the C++17 draft provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these implicit conversions at default. If you still want them, define this macro to 1. Without these implicit conversions enabled, a conversion to bool via the [safe bool idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Safe_bool) is provided. Default is 0.
