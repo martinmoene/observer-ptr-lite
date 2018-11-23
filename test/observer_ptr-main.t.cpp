@@ -49,42 +49,25 @@ CASE( "__cplusplus" "[.stdc++]" )
 
 CASE( "Compiler version" "[.compiler]" )
 {
-//  nsop_PRESENT( nsop_COMPILER_CLANG_VERSION );
-//  nsop_PRESENT( nsop_COMPILER_GNUC_VERSION );
+    nsop_PRESENT( nsop_COMPILER_CLANG_VERSION );
+    nsop_PRESENT( nsop_COMPILER_GNUC_VERSION );
     nsop_PRESENT( nsop_COMPILER_MSVC_VERSION );
 }
 
 CASE( "Presence of C++ language features" "[.stdlanguage]" )
 {
-//  nsop_PRESENT( nsop_HAVE_AUTO );
-//  nsop_PRESENT( nsop_HAVE_NULLPTR );
-//  nsop_PRESENT( nsop_HAVE_STATIC_ASSERT );
-//  nsop_PRESENT( nsop_HAVE_DEFAULT_FUNCTION_TEMPLATE_ARG );
-//  nsop_PRESENT( nsop_HAVE_ALIAS_TEMPLATE );
-//  nsop_PRESENT( nsop_HAVE_CONSTEXPR_11 );
-//  nsop_PRESENT( nsop_HAVE_CONSTEXPR_14 );
-//  nsop_PRESENT( nsop_HAVE_ENUM_CLASS );
-//  nsop_PRESENT( nsop_HAVE_ENUM_CLASS_CONSTRUCTION_FROM_UNDERLYING_TYPE );
-//  nsop_PRESENT( nsop_HAVE_EXPLICIT_CONVERSION );
-//  nsop_PRESENT( nsop_HAVE_INITIALIZER_LIST );
-//  nsop_PRESENT( nsop_HAVE_IS_DEFAULT );
-//  nsop_PRESENT( nsop_HAVE_IS_DELETE );
-//  nsop_PRESENT( nsop_HAVE_NOEXCEPT );
+    nsop_PRESENT( nsop_HAVE_CONSTEXPR_11 );
+    nsop_PRESENT( nsop_HAVE_CONSTEXPR_14 );
+    nsop_PRESENT( nsop_HAVE_EXPLICIT_CONVERSION );
+    nsop_PRESENT( nsop_HAVE_NOEXCEPT );
+    nsop_PRESENT( nsop_HAVE_NULLPTR );
 }
 
 CASE( "Presence of C++ library features" "[.stdlibrary]" )
 {
-//  nsop_PRESENT( nsop_HAVE_ARRAY );
-//  nsop_PRESENT( nsop_HAVE_ADD_CONST );
-//  nsop_PRESENT( nsop_HAVE_TR1_ADD_CONST );
-//  nsop_PRESENT( nsop_HAVE_CONDITIONAL );
-//  nsop_PRESENT( nsop_HAVE_CONTAINER_DATA_METHOD );
-//  nsop_PRESENT( nsop_HAVE_REMOVE_CV );
-//  nsop_PRESENT( nsop_HAVE_REMOVE_REFERENCE );
-//  nsop_PRESENT( nsop_HAVE_TR1_REMOVE_REFERENCE );
-//  nsop_PRESENT( nsop_HAVE_SIZED_TYPES );
-//  nsop_PRESENT( nsop_HAVE_TYPE_TRAITS );
-//  nsop_PRESENT( nsop_HAVE_TR1_TYPE_TRAITS );
+    nsop_PRESENT( nsop_HAVE_STD_DECAY );
+    nsop_PRESENT( nsop_HAVE_STD_DECLVAL );
+    nsop_PRESENT( nsop_HAVE_TYPEOF );
 
 #if defined _HAS_CPP0X
     nsop_PRESENT( _HAS_CPP0X );

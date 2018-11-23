@@ -9,6 +9,8 @@
 #include "observer_ptr-main.t.hpp"
 #include <iostream>
 
+using namespace nonstd;
+
 namespace {
 
 CASE( "Disallows to delete the observer_ptr unless implicit conversion allowed" )
@@ -185,7 +187,7 @@ CASE( "Allows to reset to stop observing" )
 
     ap.reset();
 
-    EXPECT( ap.get() == (void*)NULL );
+    EXPECT( ap.get() == reinterpret_cast<void*>( NULL ) );
 }
 
 CASE( "Allows to reset to observe another pointer" )
@@ -334,7 +336,7 @@ CASE( "Specialized: Allows to compare if an observer is less than another observ
 
 CASE( "Specialized: Allows to compare if an observer is less than another observer with a related watched type" )
 {
-#if nsop_HAVE_OWN_COMMON_TYPE
+#if nsop_HAVE_OWN_COMMON_TYPE_STD
     int arr[] = { 7, 9, };
     observer_ptr<      int> p1( &arr[0] );
     observer_ptr<const int> p2( &arr[1] );
@@ -359,7 +361,7 @@ CASE( "Specialized: Allows to compare if an observer is less than or equal to an
 
 CASE( "Specialized: Allows to compare if an observer is less than or equal to another observer with a related watched type" )
 {
-#if nsop_HAVE_OWN_COMMON_TYPE
+#if nsop_HAVE_OWN_COMMON_TYPE_STD
     int arr[] = { 7, 9, };
     observer_ptr<      int> p1( &arr[0] );
     observer_ptr<const int> p2( &arr[1] );
@@ -384,7 +386,7 @@ CASE( "Specialized: Allows to compare if an observer is greater than another obs
 
 CASE( "Specialized: Allows to compare if an observer is greater than another observer with a related watched type" )
 {
-#if nsop_HAVE_OWN_COMMON_TYPE
+#if nsop_HAVE_OWN_COMMON_TYPE_STD
     int arr[] = { 7, 9, };
     observer_ptr<      int> p1( &arr[0] );
     observer_ptr<const int> p2( &arr[1] );
@@ -409,7 +411,7 @@ CASE( "Specialized: Allows to compare if an observer is greater than or equal to
 
 CASE( "Specialized: Allows to compare if an observer is greater than or equal to another observer with a related watched type" )
 {
-#if nsop_HAVE_OWN_COMMON_TYPE
+#if nsop_HAVE_OWN_COMMON_TYPE_STD
     int arr[] = { 7, 9, };
     observer_ptr<      int> p1( &arr[0] );
     observer_ptr<const int> p2( &arr[1] );

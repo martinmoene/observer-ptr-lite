@@ -11,10 +11,6 @@
 #ifndef NONSTD_OBSERVER_PTR_H_INCLUDED
 #define NONSTD_OBSERVER_PTR_H_INCLUDED
 
-#include <cassert>
-#include <algorithm>
-#include <functional>
-
 #define observer_ptr_MAJOR  0
 #define observer_ptr_MINOR  2
 #define observer_ptr_PATCH  0
@@ -24,7 +20,7 @@
 #define nsop_STRINGIFY(  x )  nsop_STRINGIFY_( x )
 #define nsop_STRINGIFY_( x )  #x
 
-// Configuration:
+// observer_ptr configuration:
 
 #ifndef  nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION
 # define nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION  0
@@ -34,60 +30,149 @@
 # define nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS  0
 #endif
 
-// Compiler detection:
+#define nsop_OBSERVER_PTR_DEFAULT  0
+#define nsop_OBSERVER_PTR_NONSTD   1
+#define nsop_OBSERVER_PTR_STD      2
 
-#define nsop_CPP11_OR_GREATER  ( __cplusplus >= 201103L )
-#define nsop_CPP14_OR_GREATER  ( __cplusplus >= 201402L )
+#if !defined( nsop_CONFIG_SELECT_OBSERVER_PTR )
+# define nsop_CONFIG_SELECT_OBSERVER_PTR  ( nsop_HAVE_STD_OBSERVER_PTR ? nsop_OBSERVER_PTR_STD : nsop_OBSERVER_PTR_NONSTD )
+#endif
+
+// C++ language version detection (C++20 is speculative):
+// Note: VC14.0/1900 (VS2015) lacks too much from C++14.
+
+#ifndef   nsop_CPLUSPLUS
+# if defined(_MSVC_LANG ) && !defined(__clang__)
+#  define nsop_CPLUSPLUS  (_MSC_VER == 1900 ? 201103L : _MSVC_LANG )
+# else
+#  define nsop_CPLUSPLUS  __cplusplus
+# endif
+#endif
+
+#define nsop_CPP98_OR_GREATER  ( nsop_CPLUSPLUS >= 199711L )
+#define nsop_CPP11_OR_GREATER  ( nsop_CPLUSPLUS >= 201103L )
+#define nsop_CPP11_OR_GREATER_ ( nsop_CPLUSPLUS >= 201103L )
+#define nsop_CPP14_OR_GREATER  ( nsop_CPLUSPLUS >= 201402L )
+#define nsop_CPP17_OR_GREATER  ( nsop_CPLUSPLUS >= 201703L )
+#define nsop_CPP20_OR_GREATER  ( nsop_CPLUSPLUS >= 202000L )
+
+// Use C++17 std::any if available and requested:
+
+#if nsop_CPP17_OR_GREATER && defined(__has_include )
+# if __has_include( <experimental/memory> )
+#  define nsop_HAVE_STD_OBSERVER_PTR  1
+# else
+#  define nsop_HAVE_STD_OBSERVER_PTR  0
+# endif
+#else
+# define  nsop_HAVE_STD_OBSERVER_PTR  0
+#endif
+
+#define  nsop_USES_STD_OBSERVER_PTR  ( (nsop_CONFIG_SELECT_OBSERVER_PTR == nsop_OBSERVER_PTR_STD) || ((nsop_CONFIG_SELECT_OBSERVER_PTR == nsop_OBSERVER_PTR_DEFAULT) && nsop_HAVE_STD_OBSERVER_PTR) )
+
+//
+// Using std::experimental::observer_ptr:
+//
+
+#if nsop_USES_STD_OBSERVER_PTR
+
+#include <experimental/memory>
+
+namespace nonstd {
+
+    using std::experimental::observer_ptr;
+    using std::experimental::make_observer;
+    using std::experimental::swap;
+
+    using std::experimental::operator==;
+    using std::experimental::operator!=;
+    using std::experimental::operator<;
+    using std::experimental::operator<=;
+    using std::experimental::operator>;
+    using std::experimental::operator>=;
+}
+
+#else // nsop_USES_STD_OBSERVER_PTR
+
+#include <cassert>
+#include <algorithm>
+#include <functional>
+
+// Compiler versions:
+//
+// MSVC++ 6.0  _MSC_VER == 1200 (Visual Studio 6.0)
+// MSVC++ 7.0  _MSC_VER == 1300 (Visual Studio .NET 2002)
+// MSVC++ 7.1  _MSC_VER == 1310 (Visual Studio .NET 2003)
+// MSVC++ 8.0  _MSC_VER == 1400 (Visual Studio 2005)
+// MSVC++ 9.0  _MSC_VER == 1500 (Visual Studio 2008)
+// MSVC++ 10.0 _MSC_VER == 1600 (Visual Studio 2010)
+// MSVC++ 11.0 _MSC_VER == 1700 (Visual Studio 2012)
+// MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013)
+// MSVC++ 14.0 _MSC_VER == 1900 (Visual Studio 2015)
+// MSVC++ 14.1 _MSC_VER >= 1910 (Visual Studio 2017)
+
+#if defined(_MSC_VER ) && !defined(__clang__)
+# define nsop_COMPILER_MSVC_VER      (_MSC_VER )
+# define nsop_COMPILER_MSVC_VERSION  (_MSC_VER / 10 - 10 * ( 5 + (_MSC_VER < 1900 ) ) )
+#else
+# define nsop_COMPILER_MSVC_VER      0
+# define nsop_COMPILER_MSVC_VERSION  0
+#endif
+
+#define nsop_COMPILER_VERSION( major, minor, patch )  ( 10 * ( 10 * (major) + (minor) ) + (patch) )
+
+#if defined(__clang__)
+# define nsop_COMPILER_CLANG_VERSION  nsop_COMPILER_VERSION(__clang_major__, __clang_minor__, __clang_patchlevel__)
+#else
+# define nsop_COMPILER_CLANG_VERSION  0
+#endif
+
+#if defined(__GNUC__) && !defined(__clang__)
+# define nsop_COMPILER_GNUC_VERSION  nsop_COMPILER_VERSION(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__)
+#else
+# define nsop_COMPILER_GNUC_VERSION  0
+#endif
 
 // half-open range [lo..hi):
 #define nsop_BETWEEN( v, lo, hi ) ( (lo) <= (v) && (v) < (hi) )
 
-#if defined(_MSC_VER)
-# define nsop_COMPILER_MSVC_VERSION   (_MSC_VER / 100 - 5 - (_MSC_VER < 1900))
+// Presence of language and library features:
+
+#ifdef _HAS_CPP0X
+# define nsop_HAS_CPP0X  _HAS_CPP0X
 #else
-# define nsop_COMPILER_MSVC_VERSION   0
-# define nsop_COMPILER_NON_MSVC       1
+# define nsop_HAS_CPP0X  0
 #endif
 
-// Presence of C++ language features:
+// Unless defined otherwise below, consider VC12 as C++11 for observer_ptr:
 
-#if nsop_CPP11_OR_GREATER
-# define nsop_HAVE_CONSTEXPR_11  1
-#endif
-
-#if nsop_CPP14_OR_GREATER
-# define nsop_HAVE_CONSTEXPR_14  1
-#endif
-
-#if nsop_CPP11_OR_GREATER || nsop_COMPILER_MSVC_VERSION >= 14
-# define nsop_HAVE_EXPLICIT_CONVERSION  1
-#endif
-
-#if nsop_CPP11_OR_GREATER || nsop_COMPILER_MSVC_VERSION >= 14
-# define nsop_HAVE_NOEXCEPT  1
-#endif
-
-#if nsop_CPP11_OR_GREATER || nsop_COMPILER_MSVC_VERSION >= 10
-# define nsop_HAVE_NULLPTR  1
-#endif
-
-#if defined( __GNUC__ )
-# define nsop_HAVE_TYPEOF  1
-#endif
-
-// Presence of C++ library features:
-
-// For the rest, consider VC12, VC14 as C++11 for observer_ptr<>:
-
-#if nsop_COMPILER_MSVC_VERSION >= 12
+#if nsop_COMPILER_MSVC_VER >= 1800
 # undef  nsop_CPP11_OR_GREATER
 # define nsop_CPP11_OR_GREATER  1
 #endif
 
-#if nsop_CPP11_OR_GREATER || nsop_COMPILER_MSVC_VERSION >= 11
-# define nsop_HAVE_STD_DECAY    1
-# define nsop_HAVE_STD_DECLVAL  1
-#endif
+#define nsop_CPP11_100  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1600)
+#define nsop_CPP11_110  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1700)
+#define nsop_CPP11_140  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1900)
+
+#define nsop_CPP11_000  (nsop_CPP11_OR_GREATER_)
+#define nsop_CPP14_000  (nsop_CPP14_OR_GREATER )
+#define nsop_CPP17_000  (nsop_CPP17_OR_GREATER )
+
+// Presence of C++ language features:
+
+#define nsop_HAVE_CONSTEXPR_11          nsop_CPP11_000
+#define nsop_HAVE_CONSTEXPR_14          nsop_CPP14_000
+#define nsop_HAVE_EXPLICIT_CONVERSION   nsop_CPP11_140
+#define nsop_HAVE_NOEXCEPT              nsop_CPP11_140
+#define nsop_HAVE_NULLPTR               nsop_CPP11_100
+
+#define nsop_HAVE_TYPEOF  (!!nsop_COMPILER_GNUC_VERSION)
+
+// Presence of C++ library features:
+
+#define nsop_HAVE_STD_DECAY             nsop_CPP11_110
+#define nsop_HAVE_STD_DECLVAL           nsop_CPP11_110
 
 // C++ feature usage:
 
@@ -126,15 +211,12 @@
 #if nsop_HAVE_STD_DECAY && nsop_HAVE_STD_DECLVAL
 # include <type_traits>  // std::decay
 # include <utility>      // std::declval
-# define nsop_HAVE_OWN_COMMON_TYPE      1
-# define nsop_HAVE_OWN_COMMON_TYPE_STD  1
-#elif nsop_HAVE_TYPEOF
-# define nsop_HAVE_OWN_COMMON_TYPE         1
-# define nsop_HAVE_OWN_COMMON_TYPE_TYPEOF  1
 #endif
 
-namespace nonstd
-{
+#define nsop_HAVE_OWN_COMMON_TYPE_STD    (nsop_HAVE_STD_DECAY && nsop_HAVE_STD_DECLVAL || nsop_HAVE_TYPEOF)
+#define nsop_HAVE_OWN_COMMON_TYPE_TYPEOF  nsop_HAVE_TYPEOF
+
+namespace nonstd {
 
 template< class W >
 class observer_ptr
@@ -266,13 +348,13 @@ bool operator==( std::nullptr_t, observer_ptr<W> p ) nsop_noexcept
 template< class W >
 bool operator!=( observer_ptr<W> p, std::nullptr_t ) nsop_noexcept
 {
-    return (bool)p;
+    return static_cast<bool>( p );
 }
 
 template< class W >
 bool operator!=( std::nullptr_t, observer_ptr<W> p ) nsop_noexcept
 {
-    return (bool)p;
+    return static_cast<bool>( p );
 }
 #endif
 
@@ -331,6 +413,8 @@ struct hash< ::nonstd::observer_ptr<T> >
 #endif
 
 // #undef ...
+
+#endif // nsop_USES_STD_OBSERVER_PTR
 
 #endif // NONSTD_OBSERVER_PTR_H_INCLUDED
 
