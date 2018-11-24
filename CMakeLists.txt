@@ -24,6 +24,9 @@ endif()
 option( NSOP_OPT_BUILD_TESTS    "Build and perform observer_ptr tests" ${observer_ptr_IS_TOPLEVEL_PROJECT} )
 option( NSOP_OPT_BUILD_EXAMPLES "Build observer_ptr examples" OFF )
 
+option( NSOP_OPT_SELECT_STD      "Select std::experimental::observer_ptr" OFF )
+option( NSOP_OPT_SELECT_NONSTD   "Select nonstd::observer_ptr" OFF )
+
 enable_testing()
 
 if ( NSOP_OPT_BUILD_TESTS )

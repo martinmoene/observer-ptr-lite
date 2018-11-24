@@ -173,6 +173,24 @@ else()
     endif()
 endif()
 
+# with C++17, honour explicit request for std::experimental::observer_ptr or nonstd::observer_ptr:
+
+if( HAS_CPP17_FLAG )
+    set( WHICH nsop_OBSERVER_PTR_DEFAULT )
+
+    if( NSOP_OPT_SELECT_STD )
+        set( WHICH nsop_OBSERVER_PTR_STD )
+    elseif( NSOP_OPT_SELECT_NONSTD )
+        set( WHICH nsop_OBSERVER_PTR_NONSTD )
+    endif()
+
+    target_compile_definitions( ${MAIN_BASE}-cpp17.t PRIVATE nsop_CONFIG_SELECT_OBSERVER_PTR=${WHICH} )
+
+    if( HAS_CPPLATEST_FLAG )
+        target_compile_definitions( ${MAIN_BASE}-cpplatest.t PRIVATE nsop_CONFIG_SELECT_OBSERVER_PTR=${WHICH} )
+    endif()
+endif()
+
 # configure unit tests via CTest:
 
 enable_testing()
