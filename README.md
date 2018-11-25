@@ -103,12 +103,12 @@ Synopsis
 --------
 
 **Contents**  
-- [Usage](#usage)
-- [Configuration macros](#configuration-macros)
+[Documentation of `std::observer_ptr`](#documentation-of-stdobserver_ptr)  
+[Configuration macros](#configuration-macros)  
 
-### Usage
+### Documentation of `std::observer_ptr`
 
-For its usage, see the documentation of [*observer_ptr* at cppreference](https://en.cppreference.com/w/cpp/experimental/observer_ptr).
+Depending on the compiler and C++-standard used, `nonstd::observer_ptr` behaves less or more like `std::observer_ptr`. To get an idea of the capabilities of `nonstd::observer_ptr` with your configuration, look at the output of the [tests](test/observer_ptr.t.cpp), issuing `observer_ptr-main.t --pass @`. For `std::observer_ptr`, see its [documentation at cppreference](https://en.cppreference.com/w/cpp/experimental/observer_ptr).  
 
 ### Configuration macros
 
