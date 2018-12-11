@@ -406,7 +406,10 @@ namespace std
 template< class T >
 struct hash< ::nonstd::observer_ptr<T> >
 {
-    size_t operator()(::nonstd::observer_ptr<T> p ) const { return hash<T*>()( p.get() ); }
+    size_t operator()(::nonstd::observer_ptr<T> p ) const nsop_noexcept 
+    { 
+        return hash<T*>()( p.get() ); 
+    }
 };
 
 }
