@@ -20,13 +20,13 @@ set( ${PROJECT_NAME}_version "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.
 
 # Toplevel or subproject:
 
-if ( CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
+if ( CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME )
     set( observer_ptr_IS_TOPLEVEL_PROJECT TRUE )
 else()
     set( observer_ptr_IS_TOPLEVEL_PROJECT FALSE )
 endif()
 
-# At default, disable building and performing of tests and building of examples:
+# If toplevel project, enable building and performing of tests, disable building of examples:
 
 option( NSOP_OPT_BUILD_TESTS    "Build and perform observer_ptr tests" ${observer_ptr_IS_TOPLEVEL_PROJECT} )
 option( NSOP_OPT_BUILD_EXAMPLES "Build observer_ptr examples" OFF )
