@@ -12,7 +12,7 @@ cmake_minimum_required( VERSION 3.5 )
 project(
     observer_ptr
     VERSION 0.2.0
-    DESCRIPTION "A C++17-like observer_ptr for C++98 and later in a single-file header-only library"
+#   DESCRIPTION "A C++17-like observer_ptr for C++98 and later in a single-file header-only library"
 #   HOMEPAGE_URL "https://github.com/martinmoene/observer-ptr"
     LANGUAGES CXX )
 
