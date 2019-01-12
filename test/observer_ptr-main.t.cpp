@@ -42,7 +42,6 @@ CASE( "observer_ptr configuration" "[.observer_ptr][.config]" )
     nsop_PRESENT( nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS );
     nsop_PRESENT( nsop_HAVE_STD_OBSERVER_PTR );
     nsop_PRESENT( nsop_USES_STD_OBSERVER_PTR );
-    nsop_PRESENT( nsop_CONFIG_SELECT_OBSERVER_PTR );
     nsop_PRESENT( nsop_OBSERVER_PTR_DEFAULT );
     nsop_PRESENT( nsop_OBSERVER_PTR_NONSTD );
     nsop_PRESENT( nsop_OBSERVER_PTR_STD );
@@ -101,17 +100,17 @@ int main( int argc, char * argv[] )
 }
 
 #if 0
-g++            -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
-g++ -std=c++98 -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
-g++ -std=c++03 -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
-g++ -std=c++0x -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
-g++ -std=c++11 -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
-g++ -std=c++14 -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
-g++ -std=c++17 -I../include/nonstd -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++            -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++ -std=c++98 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++ -std=c++03 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++ -std=c++0x -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++ -std=c++11 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++ -std=c++14 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
+g++ -std=c++17 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
 
-cl -EHsc -I../include/nonstd observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
-cl -EHsc -Dnsop_FEATURE_ALLOW_IMPLICIT_CONVERSION=1 -I../include/nonstd observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
-cl -EHsc -Dnsop_CONFIG_CONFIRMS_COMPILATION_ERRORS=1 -I../include/nonstd observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
+cl -EHsc -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
+cl -EHsc -Dnsop_FEATURE_ALLOW_IMPLICIT_CONVERSION=1 -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
+cl -EHsc -Dnsop_CONFIG_CONFIRMS_COMPILATION_ERRORS=1 -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
 #endif
 
 // end of file
