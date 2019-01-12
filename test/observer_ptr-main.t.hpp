@@ -1,4 +1,4 @@
-// Copyright 2013-2018 by Martin Moene
+// Copyright 2015-2019 by Martin Moene
 //
 // nonstd::observer_ptr<> is a C++98 onward implementation for std::observer_ptr as of C++17.
 //

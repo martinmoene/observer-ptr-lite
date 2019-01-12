@@ -1,8 +1,8 @@
-// Copyright 2013-2018 by Martin Moene
+// Copyright 2015-2019 by Martin Moene
 //
 // nonstd::observer_ptr<> is a C++98 onward implementation for std::observer_ptr as of C++17.
 //
-// Distributed under the Boost Software License, Version 1.0. 
+// Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
@@ -48,7 +48,7 @@ CASE( "Disallows implicit conversion to bool unless implicit conversion allowed"
     int a = 7;
 
     observer_ptr<int> ap( &a );
-    
+
     if ( ap ) {}
 #else
     EXPECT( true );
@@ -66,7 +66,7 @@ CASE( "Disallows implicit conversion to underlying type unless implicit conversi
     struct F { static void use( int * ) {} };
     int a = 7;
     observer_ptr<int> ap( &a );
-    
+
     F::use( ap );
 #else
     EXPECT( true );
@@ -78,7 +78,7 @@ CASE( "Disallows comparison to an observer_ptr with a different underlying type"
 #if nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS
     int  a = 7; observer_ptr<int > ap( &a );
     long b = 9; observer_ptr<long> bp( &b );
-    
+
     if ( ap == bp ) {}
     if ( ap != bp ) {}
 #else
@@ -161,7 +161,7 @@ CASE( "Allows to test for a non-null pointer via conversion to bool" )
 {
     int a = 7;
     observer_ptr<int> ap( &a );
-    
+
     if ( ap ) {}
 
     EXPECT( !!ap );

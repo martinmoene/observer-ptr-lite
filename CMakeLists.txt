@@ -1,4 +1,4 @@
-# Copyright 2013-2018 by Martin Moene
+# Copyright 2015-2019 by Martin Moene
 #
 # https://github.com/martinmoene/observer-ptr
 #
