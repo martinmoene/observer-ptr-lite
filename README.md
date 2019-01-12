@@ -116,6 +116,10 @@ Depending on the compiler and C++-standard used, `nonstd::observer_ptr` behaves 
 \-D<b>nsop\_CPLUSPLUS</b>=199711L  
 Define this macro to override the auto-detection of the supported C++ standard, or if your compiler does not set the `__cplusplus` macro correctly.
 
+#### Disable exceptions
+-D<b>nsop_CONFIG_NO_EXCEPTIONS</b>=0
+Define this to 1 if you want to compile without exceptions. If not defined, the header tries and detect if exceptions have been disabled (e.g. via `-fno-exceptions`). Default is undefined.
+
 #### Select `std::experimental::observer_ptr` or `nonstd::observer_ptr`
 At default, *observer-ptr lite* uses `std::experimental::observer_ptr` if it is available and lets you use it via namespace `nonstd`. You can however override this default and explicitly request to use `std::experimental::observer_ptr` or *observer-ptr lite*'s `nonstd::observer_ptr` as `nonstd::observer_ptr` via the following macros.
 

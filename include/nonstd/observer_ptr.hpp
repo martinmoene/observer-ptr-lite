@@ -1,8 +1,8 @@
-// Copyright 2013-2018 by Martin Moene
+// Copyright 2015-2019 by Martin Moene
 //
 // nonstd::observer_ptr<> is a C++98 onward implementation for std::observer_ptr as of C++17.
 //
-// Distributed under the Boost Software License, Version 1.0. 
+// Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
@@ -36,6 +36,16 @@
 
 #if !defined( nsop_CONFIG_SELECT_OBSERVER_PTR )
 # define nsop_CONFIG_SELECT_OBSERVER_PTR  ( nsop_HAVE_STD_OBSERVER_PTR ? nsop_OBSERVER_PTR_STD : nsop_OBSERVER_PTR_NONSTD )
+#endif
+
+// Control presence of exception handling (try and auto discover):
+
+#ifndef nsop_CONFIG_NO_EXCEPTIONS
+# if defined(__cpp_exceptions) || defined(__EXCEPTIONS) || defined(_CPPUNWIND)
+#  define nsop_CONFIG_NO_EXCEPTIONS  0
+# else
+#  define nsop_CONFIG_NO_EXCEPTIONS  1
+# endif
 #endif
 
 // C++ language version detection (C++20 is speculative):
@@ -194,7 +204,7 @@ namespace nonstd {
 # define nsop_explicit /*nothing*/
 #endif
 
-#if nsop_HAVE_NOEXCEPT
+#if nsop_HAVE_NOEXCEPT && ! nsop_CONFIG_NO_EXCEPTIONS
 # define nsop_noexcept noexcept
 #else
 # define nsop_noexcept /*nothing*/
@@ -406,9 +416,9 @@ namespace std
 template< class T >
 struct hash< ::nonstd::observer_ptr<T> >
 {
-    size_t operator()(::nonstd::observer_ptr<T> p ) const nsop_noexcept 
-    { 
-        return hash<T*>()( p.get() ); 
+    size_t operator()(::nonstd::observer_ptr<T> p ) const nsop_noexcept
+    {
+        return hash<T*>()( p.get() );
     }
 };
 
