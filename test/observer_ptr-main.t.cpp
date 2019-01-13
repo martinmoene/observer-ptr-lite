@@ -1,5 +1,5 @@
 //
-// Copyright 2015-2018 Martin Moene
+// Copyright (c) 2016-2018 Martin Moene
 //
 // https://github.com/martinmoene/observer_ptr
 //
@@ -40,7 +40,6 @@ CASE( "observer_ptr configuration" "[.observer_ptr][.config]" )
 {
     nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION );
     nsop_PRESENT( nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS );
-    nsop_PRESENT( nsop_CONFIG_NO_EXCEPTIONS );
     nsop_PRESENT( nsop_CONFIG_SELECT_OBSERVER_PTR );
     nsop_PRESENT( nsop_HAVE_STD_OBSERVER_PTR );
     nsop_PRESENT( nsop_USES_STD_OBSERVER_PTR );

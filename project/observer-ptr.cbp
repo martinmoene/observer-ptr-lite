@@ -32,7 +32,6 @@
 		<Unit filename="../cmake/observer_ptr-config.cmake.in" />
 		<Unit filename="../conanfile.py" />
 		<Unit filename="../example/01-basic.cpp" />
-		<Unit filename="../example/02-no-exceptions.cpp" />
 		<Unit filename="../include/nonstd/observer_ptr.hpp" />
 		<Unit filename="../script/update-version.py" />
 		<Unit filename="../test/CMakeLists.txt" />
