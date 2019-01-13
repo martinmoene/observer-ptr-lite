@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2018 Martin Moene
+// Copyright 2018-2019 by Martin Moene
 //
 // https://github.com/martinmoene/observer_ptr
 //
