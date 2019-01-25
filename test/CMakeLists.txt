@@ -9,8 +9,9 @@ cmake_minimum_required( VERSION 3.5 )
 
 project( test LANGUAGES CXX )
 
-set( PACKAGE   ${package_name} )
-set( PROGRAM   ${unit_name} )
+set( unit_name "observer_ptr" )
+set( PACKAGE   ${unit_name}-lite )
+set( PROGRAM   ${unit_name}-lite )
 set( SOURCES   ${unit_name}-main.t.cpp ${unit_name}.t.cpp )
 
 message( STATUS "Subproject '${PROJECT_NAME}', programs '${PROGRAM}-*'")
