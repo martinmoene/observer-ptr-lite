@@ -237,8 +237,12 @@ public:
     nsop_constexpr14 explicit observer_ptr( pointer p ) nsop_noexcept
     : ptr(p) {}
 
+#if nsop_CPP11_OR_GREATER
+    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
+#else
     template< class W2 >
-    nsop_constexpr14 observer_ptr(observer_ptr<W2> other ) nsop_noexcept
+#endif
+    nsop_constexpr14 observer_ptr( observer_ptr<W2> other ) nsop_noexcept
     : ptr( other.get() ) {}
 
     nsop_constexpr14 pointer get() const nsop_noexcept
