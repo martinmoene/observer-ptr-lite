@@ -135,7 +135,7 @@ Define this macro to 1 to experience the by-design compile-time errors of the *o
 
 Other open source implementations
 ---------------------------------
-None known.
+- Mário Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
 
 
 Notes and references
