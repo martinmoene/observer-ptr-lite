@@ -274,9 +274,11 @@ public:
         return ptr;
     }
 #else
+private:
     typedef void (observer_ptr::*safe_bool)() const;
     void this_type_does_not_support_comparisons() const {}
-
+public:
+    
     nsop_constexpr14 operator safe_bool() const nsop_noexcept
     {
         return ptr != nsop_NULLPTR ? &observer_ptr::this_type_does_not_support_comparisons : 0;
