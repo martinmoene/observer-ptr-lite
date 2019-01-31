@@ -47,7 +47,7 @@ In a nutshell
 -------------
 **observer-ptr** is an implementation of the *world’s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading ([Note 1](#note1)).
 
-Class template `observer_ptr<>` has been proposed for inclusion into the C++ standard [1] and is part of Extensions for Library Fundamentals v2/v3 [2][3].
+Class template `observer_ptr<>` has been proposed for inclusion into the C++ standard [1] and is part of Extensions for Library Fundamentals v2/v3 [[2](#ref2)][[3](#ref3)].
 
 The *observer-ptr* of this project can be used with probably any clang, g++ or MSVC compiler. It has been tested with clang 3.4, g++ 5.2 and with VC6 (VS6, no comparison of observers), VC8 (VS2005), VC10 (VS2010), VC11 (VS2012), VC12 (VS2013), VC14 (VS2015).
 
@@ -108,7 +108,7 @@ Synopsis
 
 ### Documentation of `std::experimental::observer_ptr`
 
-Depending on the compiler and C++-standard used, `nonstd::observer_ptr` behaves less or more like `std::experimental::observer_ptr`. To get an idea of the capabilities of `nonstd::observer_ptr` with your configuration, look at the output of the [tests](test/observer_ptr.t.cpp), issuing `observer_ptr-main.t --pass @`. For `std::experimental::observer_ptr`, see its [documentation at cppreference](https://en.cppreference.com/w/cpp/experimental/observer_ptr).  
+Depending on the compiler and C++-standard used, `nonstd::observer_ptr` behaves less or more like `std::experimental::observer_ptr`. To get an idea of the capabilities of `nonstd::observer_ptr` with your configuration, look at the output of the [tests](test/observer_ptr.t.cpp), issuing `observer_ptr-main.t --pass @`. For `std::experimental::observer_ptr`, see its [documentation at cppreference](https://en.cppreference.com/w/cpp/experimental/observer_ptr) [[5](#ref5)].  
 
 ### Configuration macros
 
@@ -141,13 +141,14 @@ Other open source implementations
 Notes and references
 --------------------
 ### Notes
-<a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer.*  
+<a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer* [[4](#ref4)].  
 
 ### References
-<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3840.pdf) (PDF).1 January 2014.  
-[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2, [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
-[3] N4758: Working Draft, C++ Extensions for Library Fundamentals, Version 3, [Section 5.2 Non-owning pointers](https://rawgit.com/cplusplus/fundamentals-ts/v3/fundamentals-ts.html#memory.observer.ptr). 13 November 2018.  
-[4] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
+<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://wg21.link/n3840) (PDF).1 January 2014.  
+<a id="ref2"></a>[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2, [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
+<a id="ref3"></a>[3] N4758: Working Draft, C++ Extensions for Library Fundamentals, Version 3, [Section 5.2 Non-owning pointers](https://rawgit.com/cplusplus/fundamentals-ts/v3/fundamentals-ts.html#memory.observer.ptr). 13 November 2018.  
+<a id="ref4"></a>[4] Bjarne Stroustrup. [P1408: Abandon observer_ptr](http://wg21.link/p1408). 4 January 2018.  
+<a id="ref5"></a>[5] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
 
 
 Appendix
