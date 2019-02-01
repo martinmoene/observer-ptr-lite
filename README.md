@@ -125,7 +125,7 @@ Define this to `nsop_OBSERVER_PTR_STD` to select `std::experimental::observer_pt
 #### Conversions
 
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM_SMART\_PTR</b>=0  
-Alow implicit conversion from `std::unique_ptr`, `std::shared_ptr` and `std::weak_ptr`. This is an extension to the proposal. Each of these implicit conversions can also be activated separately, see below. Default is 0.
+Allow implicit conversion from `std::unique_ptr`, `std::shared_ptr` and `std::weak_ptr`. This is an extension to the proposal. Each of these implicit conversions can also be activated separately, see below. Default is 0.
 
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_UNIQUE\_PTR</b>=0  
 Allow implicit conversion from `std::unique_ptr`. This is an extension to the proposal. Default is 0.
