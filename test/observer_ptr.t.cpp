@@ -41,9 +41,9 @@ CASE( "Disallows implicit conversion to bool unless implicit conversion allowed"
 {
 #if nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS
 # if nsop_HAVE_EXPLICIT_CONVERSION
-    EXPECT( !!"no compilation failure: implicit conversion never used for C++11 (see nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
-# elif nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION
-    EXPECT( !!"no compilation failure: implicit conversion allowed for pre-C++11 (see nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+    EXPECT( !!"no compilation failure: implicit conversion never used for C++11 (see nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE)" );
+# elif nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
+    EXPECT( !!"no compilation failure: implicit conversion allowed for pre-C++11 (see nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE)" );
 # endif
     int a = 7;
 
@@ -59,9 +59,9 @@ CASE( "Disallows implicit conversion to underlying type unless implicit conversi
 {
 #if nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS
 # if nsop_HAVE_EXPLICIT_CONVERSION
-    EXPECT( !!"no compilation failure: implicit conversion never used for C++11 (see nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
-# elif nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION
-    EXPECT( !!"no compilation failure: implicit conversion allowed for pre-C++11 (see nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+    EXPECT( !!"no compilation failure: implicit conversion never used for C++11 (see nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE)" );
+# elif nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
+    EXPECT( !!"no compilation failure: implicit conversion allowed for pre-C++11 (see nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE)" );
 # endif
     struct F { static void use( int * ) {} };
     int a = 7;
@@ -169,14 +169,14 @@ CASE( "Allows to test for a non-null pointer via conversion to bool" )
 
 CASE( "Allows to convert to the observed pointer" )
 {
-#if nsop_HAVE_EXPLICIT_CONVERSION || nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION
+#if nsop_HAVE_EXPLICIT_CONVERSION || nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
     int a = 7;
     observer_ptr<int> ap( &a );
     int * q( ap );
 
     EXPECT( q == &a );
 #else
-    EXPECT( !!"no explicit (no C++11) or implicit conversion (see nsop_FEATURE_ALLOW_IMPLICIT_CONVERSION)" );
+    EXPECT( !!"no explicit (no C++11) or implicit conversion (see nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE)" );
 #endif
 }
 

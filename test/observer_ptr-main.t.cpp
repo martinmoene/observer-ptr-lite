@@ -38,7 +38,7 @@ CASE( "observer_ptr version" "[.observer_ptr][.version]" )
 
 CASE( "observer_ptr configuration" "[.observer_ptr][.config]" )
 {
-    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION );
+    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE );
     nsop_PRESENT( nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS );
     nsop_PRESENT( nsop_CONFIG_SELECT_OBSERVER_PTR );
     nsop_PRESENT( nsop_HAVE_STD_OBSERVER_PTR );
@@ -110,7 +110,7 @@ g++ -std=c++14 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp o
 g++ -std=c++17 -I../include -o observer_ptr-main.t.exe observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr.t.exe --pass
 
 cl -EHsc -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
-cl -EHsc -Dnsop_FEATURE_ALLOW_IMPLICIT_CONVERSION=1 -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
+cl -EHsc -Dnsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE=1 -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
 cl -EHsc -Dnsop_CONFIG_CONFIRMS_COMPILATION_ERRORS=1 -I../include observer_ptr-main.t.cpp observer_ptr.t.cpp && observer_ptr-main.t.exe --pass
 #endif
 

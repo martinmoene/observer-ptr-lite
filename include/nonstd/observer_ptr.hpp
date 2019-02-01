@@ -22,8 +22,8 @@
 
 // observer_ptr configuration:
 
-#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION
-# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION  0
+#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE  0
 #endif
 
 #ifndef  nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS
@@ -271,7 +271,7 @@ public:
     {
         return ptr;
     }
-#elif nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION
+#elif nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
 
     nsop_constexpr14 operator pointer() const nsop_noexcept
     {
