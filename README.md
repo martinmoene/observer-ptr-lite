@@ -144,7 +144,7 @@ Notes and references
 <a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer* [[4](#ref4)].  
 
 ### References
-<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v3](http://wg21.link/n3840) ([v1](http://wg21.link/n3514), [v2](http://wg21.link/n3740), [v3](http://wg21.link/n3840)) (PDF). 1 January 2014.  
+<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v4](http://wg21.link/n4282) ([v1](http://wg21.link/n3514), [v2](http://wg21.link/n3740), [v3](http://wg21.link/n3840), [v4](http://wg21.link/n4282) (PDF). 19 December 2012 - 7 November 2014.  
 <a id="ref2"></a>[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2, [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
 <a id="ref3"></a>[3] N4758: Working Draft, C++ Extensions for Library Fundamentals, Version 3, [Section 5.2 Non-owning pointers](https://rawgit.com/cplusplus/fundamentals-ts/v3/fundamentals-ts.html#memory.observer.ptr). 13 November 2018.  
 <a id="ref4"></a>[4] Bjarne Stroustrup. [P1408: Abandon observer_ptr](http://wg21.link/p1408). 4 January 2018.  
