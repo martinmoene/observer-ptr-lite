@@ -41,6 +41,8 @@ option( NSOP_OPT_BUILD_EXAMPLES "Build observer_ptr examples" OFF )
 option( NSOP_OPT_SELECT_STD      "Select std::experimental::observer_ptr" OFF )
 option( NSOP_OPT_SELECT_NONSTD   "Select nonstd::observer_ptr" OFF )
 
+option( NSOP_OPT_ALLOW_SMARTPTR  "Allow implicit construction from std smart pointers" OFF )
+
 if ( NSOP_OPT_BUILD_TESTS )
     enable_testing()
     add_subdirectory( test )
