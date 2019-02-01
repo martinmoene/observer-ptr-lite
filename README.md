@@ -124,6 +124,18 @@ Define this to `nsop_OBSERVER_PTR_STD` to select `std::experimental::observer_pt
 
 #### Conversions
 
+\-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM_SMART\_PTR</b>=0  
+Alow implicit conversion from `std::unique_ptr`, `std::shared_ptr` and `std::weak_ptr`. This is an extension to the proposal. Each of these implicit conversions can also be activated separately, see below. Default is 0.
+
+\-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_UNIQUE\_PTR</b>=0  
+Allow implicit conversion from `std::unique_ptr`. This is an extension to the proposal. Default is 0.
+
+\-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_SHARED\_PTR</b>=0  
+Allow implicit conversion from `std::shared_ptr`. This is an extension to the proposal. Default is 0.
+
+\-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_WEAK\_PTR</b>=0  
+Add implicit conversion from `std::weak_ptr`. This is an extension to the proposal. Default is 0.
+
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_TO\_UNDERLYING\_TYPE</b>=0  
 The proposed `observer_ptr` provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these implicit conversions at default. If you still want them, define this macro to 1. Without these implicit conversions enabled, a conversion to bool via the [safe bool idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Safe_bool) is provided. Default is 0.
 
@@ -165,6 +177,9 @@ Allows default construction
 Allows construction from nullptr
 Allows construction from a non-null pointer
 Allows construction from an observer_ptr of compatible type
+Allows implicit move-construction from a std::unique_ptr<> [smart-ptr]
+Allows implicit construction from a std::shared_ptr<> [smart-ptr]
+Allows implicit construction from a std::weak_ptr<> [smart-ptr]
 Allows to retrieve the pointer
 Allows to retrieve the value pointed to
 Allows to retrieve the member pointed to

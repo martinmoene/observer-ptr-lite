@@ -23,7 +23,8 @@ set unit_select=-D%unit%_CONFIG_SELECT_%UCAP%=%unit%_%UCAP%_DEFAULT
 ::set unit_select=-D%unit%_CONFIG_SELECT_%UCAP%=%unit%_%UCAP%_NONSTD
 ::set unit_select=-D%unit%_CONFIG_SELECT_%UCAP%=%unit%_%UCAP%_STD
 
-set unit_config=
+set unit_config=^
+    -Dnsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR=1
 
 rem -flto / -fwhole-program
 set  optflags=-O2

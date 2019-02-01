@@ -22,6 +22,26 @@
 
 // observer_ptr configuration:
 
+#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR  0
+#else
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR    nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
+#endif
+
+#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR  0
+#endif
+
+#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR  0
+#endif
+
+#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR
+# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR  0
+#endif
+
 #ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
 # define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE  0
 #endif
@@ -173,6 +193,16 @@ namespace nonstd {
 
 #define nsop_HAVE_STD_DECAY             nsop_CPP11_110
 #define nsop_HAVE_STD_DECLVAL           nsop_CPP11_110
+#define nsop_HAVE_STD_SMART_PTRS        nsop_CPP11_140
+
+// Presence and usage of smart pointers:
+
+#define nsop_HAVE_IMPLICIT_CONVERSION_FROM_SMART_PTR  ( \
+    nsop_HAVE_STD_SMART_PTRS && ( \
+        nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR || \
+        nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR || \
+        nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR    ) \
+    )
 
 // C++ feature usage:
 
@@ -204,6 +234,12 @@ namespace nonstd {
 # define nsop_NULLPTR nullptr
 #else
 # define nsop_NULLPTR NULL
+#endif
+
+// additional includes:
+
+#if nsop_HAVE_IMPLICIT_CONVERSION_FROM_SMART_PTR
+# include <memory>
 #endif
 
 // common_type:
@@ -245,6 +281,24 @@ public:
     nsop_constexpr14 observer_ptr( observer_ptr<W2> other ) nsop_noexcept
     : ptr( other.get() ) {}
 
+#if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR && nsop_HAVE_STD_SMART_PTRS
+    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
+    nsop_constexpr14 observer_ptr( std::unique_ptr<W2> && other ) nsop_noexcept
+    : ptr( other.release() ) {}
+#endif
+
+#if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR && nsop_HAVE_STD_SMART_PTRS
+    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
+    nsop_constexpr14 observer_ptr( std::shared_ptr<W2> const & other ) nsop_noexcept
+    : ptr( other.get() ) {}
+#endif
+
+#if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR && nsop_HAVE_STD_SMART_PTRS
+    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
+    nsop_constexpr14 observer_ptr( std::weak_ptr<W2> const & other ) nsop_noexcept
+    : ptr( other.get() ) {}
+#endif
+
     nsop_constexpr14 pointer get() const nsop_noexcept
     {
         return ptr;
@@ -282,7 +336,7 @@ private:
     typedef void (observer_ptr::*safe_bool)() const;
     void this_type_does_not_support_comparisons() const {}
 public:
-    
+
     nsop_constexpr14 operator safe_bool() const nsop_noexcept
     {
         return ptr != nsop_NULLPTR ? &observer_ptr::this_type_does_not_support_comparisons : 0;

@@ -38,6 +38,10 @@ CASE( "observer_ptr version" "[.observer_ptr][.version]" )
 
 CASE( "observer_ptr configuration" "[.observer_ptr][.config]" )
 {
+    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR );
+    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR );
+    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR );
+    nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR );
     nsop_PRESENT( nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE );
     nsop_PRESENT( nsop_CONFIG_CONFIRMS_COMPILATION_ERRORS );
     nsop_PRESENT( nsop_CONFIG_SELECT_OBSERVER_PTR );
@@ -85,6 +89,7 @@ CASE( "Presence of C++ library features" "[.stdlibrary]" )
 #else
     nsop_PRESENT( nsop_HAVE_STD_DECAY );
     nsop_PRESENT( nsop_HAVE_STD_DECLVAL );
+    nsop_PRESENT( nsop_HAVE_STD_SMART_PTRS );
     nsop_PRESENT( nsop_HAVE_TYPEOF );
 #endif
 
