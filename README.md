@@ -148,6 +148,7 @@ Define this macro to 1 to experience the by-design compile-time errors of the *o
 Other open source implementations
 ---------------------------------
 - Mário Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
+- Joseph Thomson. [observer<T> and optional_ref<T> for the Guideline Support Library](https://github.com/hpesoj/gsl-pointers) (MIT License).
 
 
 Notes and references
@@ -160,7 +161,10 @@ Notes and references
 <a id="ref2"></a>[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2, [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
 <a id="ref3"></a>[3] N4758: Working Draft, C++ Extensions for Library Fundamentals, Version 3, [Section 5.2 Non-owning pointers](https://rawgit.com/cplusplus/fundamentals-ts/v3/fundamentals-ts.html#memory.observer.ptr). 13 November 2018.  
 <a id="ref4"></a>[4] Bjarne Stroustrup. [P1408: Abandon observer_ptr](http://wg21.link/p1408). 4 January 2018.  
-<a id="ref5"></a>[5] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
+<a id="ref5"></a>[5] ISO C++ Standard - Future Proposals. [shared_ptr and unique_ptr should both implicitly convert to observer_ptr](https://groups.google.com/a/isocpp.org/forum/#!msg/std-proposals/7gsM7DaPWds/wlvOWH06CQAJ). 24 October 2018.  
+<a id="ref6"></a>[6] Joseph Thomson. [Pointers and the C++ Core Guidelines](https://github.com/hpesoj/gsl-pointers#pointers-and-the-c-core-guidelines). 9 February 2017.  
+<a id="ref7"></a>[7] Boost developers' mailing list. [Is there any interest in non-owning pointer-like types?](http://boost.2283326.n4.nabble.com/Is-there-any-interest-in-non-owning-pointer-like-types-tp4691421.html) 1 February 2017.  
+<a id="ref8"></a>[8] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
 
 
 Appendix
