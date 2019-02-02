@@ -283,8 +283,8 @@ public:
 
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR && nsop_HAVE_STD_SMART_PTRS
     template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
-    nsop_constexpr14 observer_ptr( std::unique_ptr<W2> && other ) nsop_noexcept
-    : ptr( other.release() ) {}
+    nsop_constexpr14 observer_ptr( std::unique_ptr<W2> const & other ) nsop_noexcept
+    : ptr( other.get() ) {}
 #endif
 
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR && nsop_HAVE_STD_SMART_PTRS

@@ -140,8 +140,6 @@ CASE( "Allows implicit move-construction from a std::unique_ptr<>" " [smart-ptr]
     observer_ptr<int> op( std::move(up) );
 
     EXPECT( *op == 42 );
-
-    delete op.get();
 #else
     EXPECT( !!"std::unique_ptr<> is not available (no C++11)" );
 #endif
