@@ -165,23 +165,6 @@ CASE( "Allows implicit construction from a std::shared_ptr<>" " [smart-ptr]" )
 #endif
 }
 
-CASE( "Allows implicit construction from a std::weak_ptr<>" " [smart-ptr]" )
-{
-#if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR
-#if nsop_HAVE_STD_SMART_PTRS
-    auto sp = std::make_shared<int>( 42 );
-
-    observer_ptr<int> wp( sp );
-
-    EXPECT( *wp == 42 );
-#else
-    EXPECT( !!"std::weak_ptr<> is not available (no C++11)" );
-#endif
-#else
-    EXPECT( !!"observer_ptr: implicit conversion from smart pointers is not enabled (nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR)" );
-#endif
-}
-
 CASE( "Allows to retrieve the pointer" )
 {
     int a = 7;

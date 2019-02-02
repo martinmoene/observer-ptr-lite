@@ -27,7 +27,6 @@
 #else
 # define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
 # define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
-# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR    nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SMART_PTR
 #endif
 
 #ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR
@@ -36,10 +35,6 @@
 
 #ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR
 # define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR  0
-#endif
-
-#ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR
-# define nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR  0
 #endif
 
 #ifndef  nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
@@ -200,8 +195,7 @@ namespace nonstd {
 #define nsop_HAVE_IMPLICIT_CONVERSION_FROM_SMART_PTR  ( \
     nsop_HAVE_STD_SMART_PTRS && ( \
         nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR || \
-        nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR || \
-        nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR    ) \
+        nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR  ) \
     )
 
 // C++ feature usage:
@@ -290,12 +284,6 @@ public:
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR && nsop_HAVE_STD_SMART_PTRS
     template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
     nsop_constexpr14 observer_ptr( std::shared_ptr<W2> const & other ) nsop_noexcept
-    : ptr( other.get() ) {}
-#endif
-
-#if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_WEAK_PTR && nsop_HAVE_STD_SMART_PTRS
-    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
-    nsop_constexpr14 observer_ptr( std::weak_ptr<W2> const & other ) nsop_noexcept
     : ptr( other.get() ) {}
 #endif
 

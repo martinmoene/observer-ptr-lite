@@ -45,7 +45,7 @@ prompt>g++ -std=c++03 -Wall -I../include -o 01-basic.exe 01-basic.cpp && 01-basi
 
 In a nutshell
 -------------
-**observer-ptr** is an implementation of the *worldâ€™s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading ([Note 1](#note1)).
+**observer-ptr** is an implementation of the *world’s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading ([Note 1](#note1)).
 
 Class template `observer_ptr<>` has been proposed for inclusion into the C++ standard [1] and is part of Extensions for Library Fundamentals v2/v3 [[2](#ref2)][[3](#ref3)].
 
@@ -125,16 +125,13 @@ Define this to `nsop_OBSERVER_PTR_STD` to select `std::experimental::observer_pt
 #### Conversions
 
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM_SMART\_PTR</b>=0  
-Allow implicit conversion from `std::unique_ptr`, `std::shared_ptr` and `std::weak_ptr`. This is an extension to the proposal. Each of these implicit conversions can also be activated separately, see below. Default is 0.
+Allow implicit conversion from `std::unique_ptr` and `std::shared_ptr`. This is an extension to the proposal. Each of these implicit conversions can also be activated separately, see below. Default is 0.
 
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_UNIQUE\_PTR</b>=0  
 Allow implicit conversion from `std::unique_ptr`. This is an extension to the proposal. Default is 0.
 
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_SHARED\_PTR</b>=0  
 Allow implicit conversion from `std::shared_ptr`. This is an extension to the proposal. Default is 0.
-
-\-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_FROM\_WEAK\_PTR</b>=0  
-Add implicit conversion from `std::weak_ptr`. This is an extension to the proposal. Default is 0.
 
 \-D<b>nsop\_CONFIG\_ALLOW\_IMPLICIT\_CONVERSION\_TO\_UNDERLYING\_TYPE</b>=0  
 The proposed `observer_ptr` provides [explicit conversions](http://en.cppreference.com/w/cpp/language/explicit) to `bool` and to the underlying type. Explicit conversion is not available from pre-C++11 compilers. To prevent problems due to unexpected [implicit conversions](http://en.cppreference.com/w/cpp/language/implicit_cast) to `bool` or to the underlying type, this library does not provide these implicit conversions at default. If you still want them, define this macro to 1. Without these implicit conversions enabled, a conversion to bool via the [safe bool idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Safe_bool) is provided. Default is 0.
@@ -147,7 +144,7 @@ Define this macro to 1 to experience the by-design compile-time errors of the *o
 
 Other open source implementations
 ---------------------------------
-- MÃ¡rio Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
+- Mário Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
 - Joseph Thomson. [observer<T> and optional_ref<T> for the Guideline Support Library](https://github.com/hpesoj/gsl-pointers) (MIT License).
 
 
@@ -157,14 +154,15 @@ Notes and references
 <a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer* [[4](#ref4)].  
 
 ### References
-<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the Worldâ€™s Dumbest Smart Pointer, v4](http://wg21.link/n4282) ([v1](http://wg21.link/n3514), [v2](http://wg21.link/n3740), [v3](http://wg21.link/n3840), [v4](http://wg21.link/n4282) (PDF). 19 December 2012 - 7 November 2014.  
+<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v4](http://wg21.link/n4282) ([v1](http://wg21.link/n3514), [v2](http://wg21.link/n3740), [v3](http://wg21.link/n3840), [v4](http://wg21.link/n4282) (PDF). 19 December 2012 - 7 November 2014.  
 <a id="ref2"></a>[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2, [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
 <a id="ref3"></a>[3] N4758: Working Draft, C++ Extensions for Library Fundamentals, Version 3, [Section 5.2 Non-owning pointers](https://rawgit.com/cplusplus/fundamentals-ts/v3/fundamentals-ts.html#memory.observer.ptr). 13 November 2018.  
 <a id="ref4"></a>[4] Bjarne Stroustrup. [P1408: Abandon observer_ptr](http://wg21.link/p1408). 4 January 2018.  
 <a id="ref5"></a>[5] ISO C++ Standard - Future Proposals. [shared_ptr and unique_ptr should both implicitly convert to observer_ptr](https://groups.google.com/a/isocpp.org/forum/#!msg/std-proposals/7gsM7DaPWds/wlvOWH06CQAJ). 24 October 2018.  
 <a id="ref6"></a>[6] Joseph Thomson. [Pointers and the C++ Core Guidelines](https://github.com/hpesoj/gsl-pointers#pointers-and-the-c-core-guidelines). 9 February 2017.  
-<a id="ref7"></a>[7] Boost developers' mailing list. [Is there any interest in non-owning pointer-like types?](http://boost.2283326.n4.nabble.com/Is-there-any-interest-in-non-owning-pointer-like-types-tp4691421.html) 1 February 2017.  
-<a id="ref8"></a>[8] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
+<a id="ref7"></a>[7] C++ Core Guidelines. [Issue 847: Pointers and the C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines/issues/847). 9 February 2017.  
+<a id="ref8"></a>[8] Boost developers' mailing list. [Is there any interest in non-owning pointer-like types?](http://boost.2283326.n4.nabble.com/Is-there-any-interest-in-non-owning-pointer-like-types-tp4691421.html) 1 February 2017.  
+<a id="ref9"></a>[9] cppreference.com. [std&#58;&#58;experimental&#58;&#58;observer_ptr](http://en.cppreference.com/w/cpp/experimental/observer_ptr).  
 
 
 Appendix
@@ -183,7 +181,6 @@ Allows construction from a non-null pointer
 Allows construction from an observer_ptr of compatible type
 Allows implicit move-construction from a std::unique_ptr<> [smart-ptr]
 Allows implicit construction from a std::shared_ptr<> [smart-ptr]
-Allows implicit construction from a std::weak_ptr<> [smart-ptr]
 Allows to retrieve the pointer
 Allows to retrieve the value pointed to
 Allows to retrieve the member pointed to
