@@ -35,6 +35,10 @@ table = (
 #        , r'\observer_ptr_version\s+=\s+"([0-9]+\.[0-9]+\.[0-9]+)"\s*$'
 #        , 'observer_ptr_version = "{major}.{minor}.{patch}"\n' )
 
+    , ( 'conanfile.py'
+        , r'version\s+=\s+"([0-9]+\.[0-9]+\.[0-9]+)"\s*$'
+        , 'version = "{major}.{minor}.{patch}"' )
+
     , ( 'include/nonstd/observer_ptr.hpp'
         , r'\#define\s+observer_ptr_MAJOR\s+[0-9]+\s*$'
         , '#define observer_ptr_MAJOR  {major}' )
