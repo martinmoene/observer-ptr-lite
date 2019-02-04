@@ -179,13 +179,13 @@ Allows default construction
 Allows construction from nullptr
 Allows construction from a non-null pointer
 Allows construction from an observer_ptr of compatible type
-Allows implicit move-construction from a std::unique_ptr<> [smart-ptr]
-Allows implicit construction from a std::shared_ptr<> [smart-ptr]
+Allows implicit move-construction from a std::unique_ptr<> [smart-ptr][extension]
+Allows implicit construction from a std::shared_ptr<> [smart-ptr][extension]
 Allows to retrieve the pointer
 Allows to retrieve the value pointed to
 Allows to retrieve the member pointed to
 Allows to test for a non-null pointer via conversion to bool
-Allows to convert to the observed pointer
+Allows to convert to the observed pointer [underlying-type][extension]
 Allows to reset to stop observing
 Allows to reset to observe another pointer
 Allows to swap two observers

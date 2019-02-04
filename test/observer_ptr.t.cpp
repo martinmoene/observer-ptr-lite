@@ -131,7 +131,7 @@ CASE( "Allows construction from an observer_ptr of compatible type" )
 #endif
 }
 
-CASE( "Allows implicit move-construction from a std::unique_ptr<>" " [smart-ptr]" )
+CASE( "Allows implicit move-construction from a std::unique_ptr<>" " [smart-ptr][extension]" )
 {
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR
 #if nsop_HAVE_STD_SMART_PTRS
@@ -148,7 +148,7 @@ CASE( "Allows implicit move-construction from a std::unique_ptr<>" " [smart-ptr]
 #endif
 }
 
-CASE( "Allows implicit construction from a std::shared_ptr<>" " [smart-ptr]" )
+CASE( "Allows implicit construction from a std::shared_ptr<>" " [smart-ptr][extension]" )
 {
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR
 #if nsop_HAVE_STD_SMART_PTRS
@@ -201,7 +201,7 @@ CASE( "Allows to test for a non-null pointer via conversion to bool" )
     EXPECT( !!ap );
 }
 
-CASE( "Allows to convert to the observed pointer" )
+CASE( "Allows to convert to the observed pointer" " [underlying-type][extension]" )
 {
 #if nsop_HAVE_EXPLICIT_CONVERSION || nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_TO_UNDERLYING_TYPE
     int a = 7;
