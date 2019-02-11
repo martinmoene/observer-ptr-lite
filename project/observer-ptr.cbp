@@ -33,6 +33,7 @@
 		<Unit filename="../conanfile.py" />
 		<Unit filename="../example/01-basic.cpp" />
 		<Unit filename="../include/nonstd/observer_ptr.hpp" />
+		<Unit filename="../script/create-vcpkg.py" />
 		<Unit filename="../script/update-version.py" />
 		<Unit filename="../script/upload-conan.py" />
 		<Unit filename="../test/CMakeLists.txt" />
