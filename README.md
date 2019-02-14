@@ -167,7 +167,12 @@ Notes and references
 
 Appendix
 --------
-### A.1 Observer Ptr test specification
+
+### A.1 Compile-time information
+
+The version of *observer-ptr lite* is available via tag `[.version]`. The following tags are available for information on the compiler and on the C++ standard library used: `[.compiler]`, `[.stdc++]`, `[.stdlanguage]` and `[.stdlibrary]`.
+
+### A.2 Observer Ptr test specification
 
 ```
 Disallows to delete the observer_ptr unless implicit conversion allowed
