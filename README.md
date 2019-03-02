@@ -45,7 +45,7 @@ prompt>g++ -std=c++03 -Wall -I../include -o 01-basic.exe 01-basic.cpp && 01-basi
 
 In a nutshell
 -------------
-**observer-ptr** is an implementation of the *world’s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading ([Note 1](#note1)).
+**observer-ptr** is an implementation of the *worldâ€™s dumbest smart pointer* for C++98 and higher. It takes no ownership responsibility for the object it *observes* or *watches* and is intended as a near drop-in replacement for raw pointer types. As a vocabulary type it indicates intended use, easing code reading ([Note 1](#note1)).
 
 Class template `observer_ptr<>` has been proposed for inclusion into the C++ standard [1] and is part of Extensions for Library Fundamentals v2/v3 [[2](#ref2)][[3](#ref3)].
 
@@ -144,7 +144,7 @@ Define this macro to 1 to experience the by-design compile-time errors of the *o
 
 Other open source implementations
 ---------------------------------
-- Mário Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
+- MÃ¡rio Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
 - Joseph Thomson. [observer<T> and optional_ref<T> for the Guideline Support Library](https://github.com/hpesoj/gsl-pointers) (MIT License).
 
 
@@ -154,7 +154,7 @@ Notes and references
 <a id="note1"></a>Note 1. This conclusion may be challenged if the coding style ensures that *any raw pointer* is a *non-owning pointer* [[4](#ref4)].  
 
 ### References
-<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the World’s Dumbest Smart Pointer, v4](http://wg21.link/n4282) ([v1](http://wg21.link/n3514), [v2](http://wg21.link/n3740), [v3](http://wg21.link/n3840), [v4](http://wg21.link/n4282) (PDF). 19 December 2012 - 7 November 2014.  
+<a id="ref1"></a>[1] Walter E. Brown. [N3840: A Proposal for the Worldâ€™s Dumbest Smart Pointer, v4](http://wg21.link/n4282) ([v1](http://wg21.link/n3514), [v2](http://wg21.link/n3740), [v3](http://wg21.link/n3840), [v4](http://wg21.link/n4282) (PDF). 19 December 2012 - 7 November 2014.  
 <a id="ref2"></a>[2] N4481: Tentative Working Draft, C++ Extensions for Library Fundamentals, Version 2, [Section 4.2 Non-owning pointers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4481.html#memory.observer.ptr). 12 April 2015.  
 <a id="ref3"></a>[3] N4758: Working Draft, C++ Extensions for Library Fundamentals, Version 3, [Section 5.2 Non-owning pointers](https://rawgit.com/cplusplus/fundamentals-ts/v3/fundamentals-ts.html#memory.observer.ptr). 13 November 2018.  
 <a id="ref4"></a>[4] Bjarne Stroustrup. [P1408: Abandon observer_ptr](http://wg21.link/p1408). 4 January 2018.  
@@ -191,6 +191,7 @@ Allows to retrieve the value pointed to
 Allows to retrieve the member pointed to
 Allows to test for a non-null pointer via conversion to bool
 Allows to convert to the observed pointer [underlying-type][extension]
+Allows to release to stop observing
 Allows to reset to stop observing
 Allows to reset to observe another pointer
 Allows to swap two observers

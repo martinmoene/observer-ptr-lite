@@ -214,6 +214,17 @@ CASE( "Allows to convert to the observed pointer" " [underlying-type][extension]
 #endif
 }
 
+CASE( "Allows to release to stop observing" )
+{
+    int a = 7;
+    observer_ptr<int> ap( &a );
+
+    int * p = ap.release();
+
+    EXPECT(        p == &a );
+    EXPECT( ap.get() == reinterpret_cast<void*>( NULL ) );
+}
+
 CASE( "Allows to reset to stop observing" )
 {
     int a = 7;
