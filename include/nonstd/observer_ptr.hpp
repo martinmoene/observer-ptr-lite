@@ -246,7 +246,7 @@ namespace nonstd {
 #define nsop_HAVE_OWN_COMMON_TYPE_STD    (nsop_HAVE_STD_DECAY && nsop_HAVE_STD_DECLVAL || nsop_HAVE_TYPEOF)
 #define nsop_HAVE_OWN_COMMON_TYPE_TYPEOF  nsop_HAVE_TYPEOF
 
-namespace nonstd {
+namespace nonstd { namespace observer_ptr_lite {
 
 template< class W >
 class observer_ptr
@@ -422,7 +422,7 @@ template< class W1, class W2 >
 bool operator<( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
     // return std::less<W3>()( p1.get(), p2.get() );
-    // where W3 is the composite pointer type (C++14 §5) of W1* and W2*.
+    // where W3 is the composite pointer type (C++14 ï¿½5) of W1* and W2*.
     return std::less< typename detail::common_type<W1*,W2*>::type >()( p1.get(), p2.get() );
 }
 
@@ -443,6 +443,21 @@ bool operator>=( observer_ptr<W1> p1, observer_ptr<W2> p2 )
 {
     return !( p1 < p2 );
 }
+
+} // namespace observer_ptr_lite
+
+// provide in namespace nonstd:
+
+using observer_ptr_lite::observer_ptr;
+using observer_ptr_lite::make_observer;
+using observer_ptr_lite::swap;
+
+using observer_ptr_lite::operator==;
+using observer_ptr_lite::operator!=;
+using observer_ptr_lite::operator<;
+using observer_ptr_lite::operator<=;
+using observer_ptr_lite::operator>;
+using observer_ptr_lite::operator>=;
 
 } // namespace nonstd
 
