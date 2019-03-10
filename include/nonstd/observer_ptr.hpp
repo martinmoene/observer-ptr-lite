@@ -178,6 +178,7 @@ namespace nonstd {
 
 #define nsop_HAVE_CONSTEXPR_11          nsop_CPP11_000
 #define nsop_HAVE_CONSTEXPR_14          nsop_CPP14_000
+#define nsop_HAVE_DEFAULT_FUNCTION_TEMPLATE_ARG  nsop_CPP11_120
 #define nsop_HAVE_EXPLICIT_CONVERSION   nsop_CPP11_140
 #define nsop_HAVE_NOEXCEPT              nsop_CPP11_140
 #define nsop_HAVE_NULLPTR               nsop_CPP11_100
@@ -246,7 +247,22 @@ namespace nonstd {
 #define nsop_HAVE_OWN_COMMON_TYPE_STD    (nsop_HAVE_STD_DECAY && nsop_HAVE_STD_DECLVAL || nsop_HAVE_TYPEOF)
 #define nsop_HAVE_OWN_COMMON_TYPE_TYPEOF  nsop_HAVE_TYPEOF
 
+// Method enabling
+
+#define nsop_REQUIRES_T(VA) \
+    , typename = typename std::enable_if< (VA), nonstd::observer_ptr_lite::detail::enabler >::type
+
+//
+// oberver_ptr:
+//
+
 namespace nonstd { namespace observer_ptr_lite {
+
+// for optional_REQUIRES_T
+
+namespace detail { /*enum*/ class enabler{}; }
+
+// observer_ptr:
 
 template< class W >
 class observer_ptr
@@ -267,23 +283,27 @@ public:
     nsop_constexpr14 explicit observer_ptr( pointer p ) nsop_noexcept
     : ptr(p) {}
 
-#if nsop_CPP11_OR_GREATER
-    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
-#else
-    template< class W2 >
+    template< class W2
+#if nsop_HAVE_DEFAULT_FUNCTION_TEMPLATE_ARG
+        nsop_REQUIRES_T(( std::is_convertible<W2*, W*>::value ))
 #endif
+    >
     nsop_constexpr14 observer_ptr( observer_ptr<W2> other ) nsop_noexcept
     : ptr( other.get() ) {}
 
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR && nsop_HAVE_STD_SMART_PTRS
-    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
+    template< class W2 
+        nsop_REQUIRES_T(( std::is_convertible<W2*, W*>::value ))
+    >
     nsop_constexpr14 observer_ptr( std::unique_ptr<W2> const & other ) nsop_noexcept
     : ptr( other.get() ) {}
 #endif
 
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_SHARED_PTR && nsop_HAVE_STD_SMART_PTRS
-    template< class W2, class = typename std::enable_if<std::is_convertible<W2*, W*>::value>::type >
-    nsop_constexpr14 observer_ptr( std::shared_ptr<W2> const & other ) nsop_noexcept
+    template< class W2
+        nsop_REQUIRES_T(( std::is_convertible<W2*, W*>::value ))
+    >
+     nsop_constexpr14 observer_ptr( std::shared_ptr<W2> const & other ) nsop_noexcept
     : ptr( other.get() ) {}
 #endif
 
