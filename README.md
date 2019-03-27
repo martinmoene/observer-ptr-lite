@@ -144,6 +144,7 @@ Define this macro to 1 to experience the by-design compile-time errors of the *o
 
 Other open source implementations
 ---------------------------------
+- Anthony Williams. [object_ptr - a safer replacement for raw pointers](https://www.justsoftwaresolutions.co.uk/cplusplus/object_ptr.html) (Boost License).
 - Mário Feroldi. [observer_ptr implementation in C++17 (Library Fundamentals TS v2)](https://github.com/feroldi/observer_ptr) (MIT License).
 - Joseph Thomson. [observer<T> and optional_ref<T> for the Guideline Support Library](https://github.com/hpesoj/gsl-pointers) (MIT License).
 
