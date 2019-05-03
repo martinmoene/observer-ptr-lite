@@ -1,5 +1,9 @@
 Changes for observert_ptr for C++98/03 and higher.
 
+0.3.0 2019-05-03
+
+Improved support for CMake and Conan and contains numerous other changes and fixes.
+
 0.2.0 2016-02-10
 
 Expanded ordered comparison of related types to pre-C++11 usage of GCC through the use of __typeof__.
