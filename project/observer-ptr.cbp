@@ -29,8 +29,8 @@
 		<Unit filename="../LICENSE.txt" />
 		<Unit filename="../README.md" />
 		<Unit filename="../appveyor.yml" />
-		<Unit filename="../cmake/observer_ptr-lite-config-version.cmake.in" />
-		<Unit filename="../cmake/observer_ptr-lite-config.cmake.in" />
+		<Unit filename="../cmake/observer-ptr-lite-config-version.cmake.in" />
+		<Unit filename="../cmake/observer-ptr-lite-config.cmake.in" />
 		<Unit filename="../conanfile.py" />
 		<Unit filename="../example/01-basic.cpp" />
 		<Unit filename="../include/nonstd/observer_ptr.hpp" />
@@ -40,9 +40,9 @@
 		<Unit filename="../script/upload-conan.py" />
 		<Unit filename="../test/CMakeLists.txt" />
 		<Unit filename="../test/lest_cpp03.hpp" />
-		<Unit filename="../test/observer_ptr-main.t.cpp" />
-		<Unit filename="../test/observer_ptr-main.t.hpp" />
-		<Unit filename="../test/observer_ptr.t.cpp" />
+		<Unit filename="../test/observer-ptr-main.t.cpp" />
+		<Unit filename="../test/observer-ptr-main.t.hpp" />
+		<Unit filename="../test/observer-ptr.t.cpp" />
 		<Unit filename="../test/t.bat" />
 		<Unit filename="../test/tc.bat" />
 		<Unit filename="../test/tg-all.bat" />

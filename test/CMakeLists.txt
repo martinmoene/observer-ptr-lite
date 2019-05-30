@@ -11,7 +11,7 @@ endif()
 
 project( test LANGUAGES CXX )
 
-set( unit_name "observer_ptr" )
+set( unit_name "observer-ptr" )
 set( PACKAGE   ${unit_name}-lite )
 set( PROGRAM   ${unit_name}-lite )
 set( SOURCES   ${unit_name}-main.t.cpp ${unit_name}.t.cpp )
