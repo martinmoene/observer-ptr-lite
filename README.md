@@ -19,7 +19,7 @@
 
 Example usage
 -------------
-```
+```Cpp
 #include "nonstd/observer_ptr.hpp"
 
 using namespace nonstd;
