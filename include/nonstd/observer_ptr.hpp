@@ -12,7 +12,7 @@
 #define NONSTD_OBSERVER_PTR_H_INCLUDED
 
 #define observer_ptr_MAJOR  0
-#define observer_ptr_MINOR  3
+#define observer_ptr_MINOR  4
 #define observer_ptr_PATCH  0
 
 #define observer_ptr_VERSION  nsop_STRINGIFY(observer_ptr_MAJOR) "." nsop_STRINGIFY(observer_ptr_MINOR) "." nsop_STRINGIFY(observer_ptr_PATCH)

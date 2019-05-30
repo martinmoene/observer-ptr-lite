@@ -11,7 +11,7 @@ cmake_minimum_required( VERSION 3.5 FATAL_ERROR )
 
 project(
     observer_ptr
-    VERSION 0.3.0
+    VERSION 0.4.0
 #   DESCRIPTION "A C++17-like observer_ptr for C++98 and later in a single-file header-only library"
 #   HOMEPAGE_URL "https://github.com/martinmoene/observer-ptr"
     LANGUAGES CXX )

@@ -1,5 +1,9 @@
 Changes for observert_ptr for C++98/03 and higher.
 
+0.4.0 2019-05-30
+
+Use dashes in unit name for vcpkg
+
 0.3.0 2019-05-03
 
 Improved support for CMake and Conan and contains numerous other changes and fixes.

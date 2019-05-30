@@ -1,7 +1,7 @@
 from conans import ConanFile, CMake
 
 class ObserverPtrLiteConan(ConanFile):
-    version = "0.3.0"
+    version = "0.4.0"
     name = "observer-ptr-lite"
     description = "An observer_ptr for C++98 and later in a single-file header-only library (Extensions for Library Fundamentals, v2, v3) "
     license = "Boost Software License - Version 1.0. http://www.boost.org/LICENSE_1_0.txt"
