@@ -168,6 +168,7 @@ namespace nonstd {
 
 #define nsop_CPP11_100  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1600)
 #define nsop_CPP11_110  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1700)
+#define nsop_CPP11_120  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1800)
 #define nsop_CPP11_140  (nsop_CPP11_OR_GREATER_ || nsop_COMPILER_MSVC_VER >= 1900)
 
 #define nsop_CPP11_000  (nsop_CPP11_OR_GREATER_)
@@ -292,7 +293,7 @@ public:
     : ptr( other.get() ) {}
 
 #if nsop_CONFIG_ALLOW_IMPLICIT_CONVERSION_FROM_UNIQUE_PTR && nsop_HAVE_STD_SMART_PTRS
-    template< class W2 
+    template< class W2
         nsop_REQUIRES_T(( std::is_convertible<W2*, W*>::value ))
     >
     nsop_constexpr14 observer_ptr( std::unique_ptr<W2> const & other ) nsop_noexcept
