@@ -252,17 +252,13 @@ namespace nonstd {
 // Method enabling
 
 #define nsop_REQUIRES_T(VA) \
-    , typename = typename std::enable_if< (VA), nonstd::observer_ptr_lite::detail::enabler >::type
+    , typename std::enable_if< (VA), int >::type = 0
 
 //
 // oberver_ptr:
 //
 
 namespace nonstd { namespace observer_ptr_lite {
-
-// for optional_REQUIRES_T
-
-namespace detail { /*enum*/ class enabler{}; }
 
 // observer_ptr:
 
