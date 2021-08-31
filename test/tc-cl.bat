@@ -3,8 +3,8 @@
 :: tc-cl.bat - compile & run tests (clang-cl).
 ::
 
-set      unit=observer-ptr
-set unit_file=%unit%
+set      unit=nsop
+set unit_file=observer-ptr
 
 :: if no std is given, use c++14
 
