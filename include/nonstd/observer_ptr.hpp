@@ -53,7 +53,7 @@
 # define nsop_CONFIG_SELECT_OBSERVER_PTR  ( nsop_HAVE_STD_OBSERVER_PTR ? nsop_OBSERVER_PTR_STD : nsop_OBSERVER_PTR_NONSTD )
 #endif
 
-// C++ language version detection (C++20 is speculative):
+// C++ language version detection (C++23 is speculative):
 // Note: VC14.0/1900 (VS2015) lacks too much from C++14.
 
 #ifndef   nsop_CPLUSPLUS
@@ -69,7 +69,8 @@
 #define nsop_CPP11_OR_GREATER_ ( nsop_CPLUSPLUS >= 201103L )
 #define nsop_CPP14_OR_GREATER  ( nsop_CPLUSPLUS >= 201402L )
 #define nsop_CPP17_OR_GREATER  ( nsop_CPLUSPLUS >= 201703L )
-#define nsop_CPP20_OR_GREATER  ( nsop_CPLUSPLUS >= 202000L )
+#define nsop_CPP20_OR_GREATER  ( nsop_CPLUSPLUS >= 202002L )
+#define nsop_CPP23_OR_GREATER  ( nsop_CPLUSPLUS >= 202300L )
 
 // Use C++17 std::any if available and requested:
 
